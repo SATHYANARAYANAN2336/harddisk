@@ -1,0 +1,54 @@
+<mat-card>
+    <mat-card-content>
+      <div class="header">
+        USER REGISTRATION PAGE
+      </div>
+      
+      <br>
+      <form autocomplete="off" class="registerform" [formGroup] = "registerform" (ngSubmit)="register(registerform.value)">
+<p>
+          <mat-form-field appearance="fill"  >
+            <mat-label>Name</mat-label>
+            <input matInput type="text" name="name" formControlName="name" placeholder="please enter name"required/>
+            <mat-error *ngIf="!registerform.controls['name'].valid">Name is required </mat-error>
+          </mat-form-field>
+</p>
+<p>
+          <mat-form-field appearance="fill"   >
+            <mat-label>Number</mat-label>
+            <input matInput type="text" name="number" formControlName="number" placeholder="please enter contact number"required/>
+            <mat-error *ngIf="!registerform.controls['number'].valid">Contact Number is required </mat-error>
+          </mat-form-field>
+</p>
+<p>
+          <mat-form-field appearance="fill"  >
+            <mat-label>Email</mat-label>
+            <input matInput type="email" name="email"  class="form-control" formControlName="email" placeholder="please enter email id"required/>
+            <mat-error *ngIf="!registerform.controls['email'].valid">Email is required</mat-error>
+          </mat-form-field>
+</p>
+<p>
+          <mat-form-field appearance="fill" style= "width: 14%">
+            <mat-label>Password</mat-label>
+            <input type="password" name="password"  class="form-control" formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="!registerform.controls['password'].valid">Password is required</mat-error>
+        </mat-form-field>
+</p>
+
+
+      <div class="button">
+        <button type="submit" class="button-row" mat-raised-button disabled color="primary" [disabled]="!registerform.valid">Register</button>
+    </div>
+    <br>
+    <p>
+      <button class="button" mat-button><a href="#" style="color: black;"  routerLink="/login">Back To Login</a></button>
+
+    </p>
+
+      </form>
+    </mat-card-content>
+  </mat-card>

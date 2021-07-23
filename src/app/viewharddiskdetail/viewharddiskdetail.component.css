@@ -1,0 +1,13 @@
+.mat-card {
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: normal;
+    text-align: center;
+}
+.mat-card-content[readonly]{
+ cursor:not-allowed;
+}
+.mat-card-header {
+   
+    flex-direction: row;
+    text-align: center;
+}

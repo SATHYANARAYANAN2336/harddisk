@@ -1,0 +1,89 @@
+<!-- <ng-container matColumnDef="add">
+  <th mat-header-cell *matHeaderCellDef > Edit </th>
+  <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button"(click)=onrowedit(row.id) >Add</button> </td>
+</ng-container> -->
+<div class="button"style="margin-right: 1%;margin-top:1%;">
+  <button mat-raised-button color="primary" type="button" (click)=onrowadd(add) >Add</button>
+</div>
+
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+
+      <ng-container matColumnDef="harddiskname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Harddiskname </th>
+        <td mat-cell *matCellDef="let row"> {{row.harddiskname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="harddiskno">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Harddiskno </th>
+        <td mat-cell *matCellDef="let row"> {{row.harddiskno}} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+ 
+      <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> mobile </th>
+        <td mat-cell *matCellDef="let row"> {{row.mobile}} </td>
+      </ng-container> -->
+      <ng-container matColumnDef="personname">
+        <th mat-header-cell *matHeaderCellDef > Person Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.personname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="entrydate">
+        <th mat-header-cell *matHeaderCellDef > Entry date </th>
+        <td mat-cell *matCellDef="let row"> {{row.entrydate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="returndate">
+        <th mat-header-cell *matHeaderCellDef > Return date </th>
+        <td mat-cell *matCellDef="let row"> {{row.returndate}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="entry">
+        <th mat-header-cell *matHeaderCellDef > Entry </th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button"(click)=onrowentry(row.id) >Entry</button> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="return">
+        <th mat-header-cell *matHeaderCellDef > Return </th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button"(click)=onrowreturn(row.id) >Return</button> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef > Edit </th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button"(click)=onrowedit(row.id) >Edit</button> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef > View </th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button" (click)=onrowview(row.id) >View</button> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef > Delete </th>
+        <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button" (click)=onrowdelete(row.id) >Delete</button> </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
+  </div>
+  
+

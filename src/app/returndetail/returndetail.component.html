@@ -1,0 +1,63 @@
+<mat-card>
+    <mat-card-content>
+      <div class="header">
+        Entry Hard-Disk Details
+      </div>
+      <br>
+      <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" (ngSubmit)="returndetail(harddiskform.value)">
+<p>
+          <mat-form-field appearance="fill" class="username" >
+            <mat-label>Hard Disk No</mat-label>
+            <input matInput readonly="text" name="name" formControlName="harddiskno" placeholder="please Enter Hard disk No"required/>
+            <mat-error *ngIf="!harddiskform.controls['harddiskno'].valid">Hard Disk No is required </mat-error>
+          </mat-form-field>
+</p>
+
+<p>
+    <mat-form-field appearance="fill" class="username" >
+      <mat-label>Hard Disk Name</mat-label>
+      <input matInput readonly="text" name="name" formControlName="harddiskname" placeholder="Please Enter Hard disk Name"required/>
+      <mat-error *ngIf="!harddiskform.controls['harddiskname'].valid">Hard Disk Name is required </mat-error>
+    </mat-form-field>
+</p>
+
+<p>
+          <mat-form-field appearance="fill" class="number"  >
+            <mat-label>Purpose</mat-label>
+            <input matInput readonly="text" name="number" formControlName="purpose" placeholder="Please Enter purpose "required/>
+            <mat-error *ngIf="!harddiskform.controls['purpose'].valid">Purpose is required </mat-error>
+          </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="fill" class="number"  >
+      <mat-label>Person</mat-label>
+      <input matInput readonly="text" name="number" formControlName="personname" placeholder="Please Enter Person name  "required/>
+      <mat-error *ngIf="!harddiskform.controls['personname'].valid">Person Name is required </mat-error>
+    </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="fill" class="number"  >
+      <mat-label>Entry date</mat-label>
+      <input matInput readonly="date" name="number" formControlName="entrydate" placeholder="Please Enter Entry date  "required/>
+      <mat-error *ngIf="!harddiskform.controls['entrydate'].valid">Entry date is required </mat-error>
+    </mat-form-field>
+</p>
+
+<p>
+    <mat-form-field appearance="fill" class="number"  >
+      <mat-label>Return date</mat-label>
+      <input matInput type="date" name="number" formControlName="returndate" placeholder="Please Enter Return date  "/>
+      <mat-error *ngIf="!harddiskform.controls['returndate'].valid">Return date is required </mat-error>
+    </mat-form-field>
+</p>
+
+
+
+
+      <div class="button">
+        <button type="submit" class="button-row" mat-raised-button disabled color="primary" [disabled]="!harddiskform.valid">Submit</button>
+    </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>

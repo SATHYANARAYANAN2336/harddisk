@@ -1,0 +1,66 @@
+<div class="header" style="text-align: center;">
+    View Hard-Disk Details
+  </div>
+<mat-card>
+    <mat-card-content>
+      
+      <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" >
+<p>
+          <mat-form-field appearance="fill" class="username" [floatLabel]="floatLabelControl.value">
+            <mat-label>Hard Disk No</mat-label>
+            <input matInput readonly="text" name="name" formControlName="harddiskno" placeholder="please Enter Hard disk No"required/>
+            <mat-error *ngIf="!harddiskform.controls['harddiskno'].valid">Hard Disk No is required </mat-error>
+          </mat-form-field>
+</p>
+
+<p>
+    <mat-form-field appearance="fill" class="username" [floatLabel]="floatLabelControl.value">
+      <mat-label>Hard Disk Name</mat-label>
+      <input matInput readonly="text" name="name" formControlName="harddiskname" placeholder="please Enter Hard disk Name"required/>
+      <mat-error *ngIf="!harddiskform.controls['harddiskname'].valid">Hard Disk Name is required </mat-error>
+    </mat-form-field>
+</p>
+
+<p>
+          <mat-form-field appearance="fill" class="number"  [floatLabel]="floatLabelControl.value">
+            <mat-label>Hard Disk Content</mat-label>
+            <input matInput readonly="text" name="number" formControlName="harddiskcontent" placeholder="please Enter Hard disk Content "required/>
+            <mat-error *ngIf="!harddiskform.controls['harddiskcontent'].valid">Hard Disk Content Number is required </mat-error>
+          </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="fill" class="number"  [floatLabel]="floatLabelControl.value">
+      <mat-label>Brand Name</mat-label>
+      <input matInput readonly="text" name="number" formControlName="brandname" placeholder="please Enter Brand Name  "required/>
+      <mat-error *ngIf="!harddiskform.controls['brandname'].valid">Brand Name is required </mat-error>
+    </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="fill" class="number"  [floatLabel]="floatLabelControl.value">
+      <mat-label>Brand Color</mat-label>
+      <input matInput readonly="text" name="number" formControlName="brandcolor" placeholder="please Enter Brand Color  "required/>
+      <mat-error *ngIf="!harddiskform.controls['brandcolor'].valid">Brand Color is required </mat-error>
+    </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="fill" class="number"  [floatLabel]="floatLabelControl.value">
+      <mat-label> Capacity</mat-label>
+      <input matInput readonly="text" name="number" formControlName="capacity" placeholder="please Enter Capacity  "required/>
+      <mat-error *ngIf="!harddiskform.controls['capacity'].valid">Capacity is required </mat-error>
+    </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="fill" class="number"  [floatLabel]="floatLabelControl.value">
+      <mat-label> Serial No</mat-label>
+      <input matInput readonly="text" name="number" formControlName="serialno" placeholder="please Enter Serial No  "required/>
+      <mat-error *ngIf="!harddiskform.controls['serialno'].valid">Serial No is required </mat-error>
+    </mat-form-field>
+</p>
+
+
+
+     
+      </form>
+    </mat-card-content>
+  </mat-card>
+
