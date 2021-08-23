@@ -23,13 +23,13 @@ export class RegisterComponent implements OnInit {
     number: [, { validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)], updateOn: "change" }],
     email: [, { validators: [Validators.required, Validators.email], updateOn: "change" }],
     password: [, { validators: [Validators.required, Validators.minLength(8)], updateOn: "change" }],
+    confirmpassword: [, { validators: [Validators.required, Validators.minLength(8)], updateOn: "change" }],
   });
 
   // floatLabelControl = new FormControl('auto');
 
   constructor(
     db:AngularFirestore,
-    private fb: FormBuilder,
     public firestore: AngularFirestore,
     private authservice: AuthService,
     public router: Router,
@@ -43,9 +43,11 @@ export class RegisterComponent implements OnInit {
   register(value:any) {
     console.log("this document created",value);
        this.authservice.registerWithEmail(value.email, value.password)
-          .then(() => {
-            this.onSubmit(value)
-            this.message = "you are register with data on firebase"
+          .then((v) => {
+            console.log(v.user.uid);
+            
+            this.onSubmit(value,v.user.uid)
+            // this.message = "you are register with data on firebase"
             this.router.navigate(['/login'])
           }).catch(_error => { alert("Email ID already in use")
             this.error = _error
@@ -53,14 +55,26 @@ export class RegisterComponent implements OnInit {
           })
   }
 
-  onSubmit(value:any){
+
+  checkpassword(){
+    if(this.registerform.controls.password.value == this.registerform.controls.confirmpassword.value){
+      this.registerform.controls.confirmpassword.setErrors(null)
+    }
+    else{
+      this.registerform.controls.confirmpassword.setErrors({error : true})
+    }
+  }
+
+  onSubmit(value:any,uid){
     console.log(value);
     const registerId = this.db.createId();
     this.db.doc('/userRegister/'+registerId).set({
+      id:registerId,
+      uid:uid,
       name:value.name,
       number:value.number,
       email:value.email,
-      password:value.password,
+     
     })
     .then(() => {
       console.log("successfully submitted");

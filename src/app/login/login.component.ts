@@ -41,10 +41,11 @@ export class LoginComponent implements OnInit {
        (this.authservice.loginWithEmail(value.email, value.password))
           .then(() => {
             console.log("successfulley Submitted");
-            this.router.navigate(['/dashboard'])
+            this.router.navigate(['/adm/dashboard'])
           }).catch(error => { alert("email ID does not exist")
             console.error("Document Writing Error:",error.message);
           });
+
   }
 
   ngOnInit() {

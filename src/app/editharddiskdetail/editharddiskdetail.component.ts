@@ -78,8 +78,14 @@ export class EditharddiskdetailComponent implements OnInit {
       console.error("Error",error);
     });
     alert("Harddisk data updated");
-    this.router.navigateByUrl("/dashboard");
+    this.router.navigateByUrl("/adm/dashboard");
   }
+
+    cancel(){
+      this.router.navigateByUrl("/adm/dashboard")
+
+    }
+    
  }
     
    

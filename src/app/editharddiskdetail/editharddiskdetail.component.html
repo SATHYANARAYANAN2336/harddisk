@@ -1,7 +1,12 @@
 <mat-card>
     <mat-card-content>
-      <div class="header">
-        Edit Hard-Disk Details
+      <div class="header"style="font-weight: 1000;">
+        <mat-toolbar>
+          <span style="margin:auto; display:table;">
+            Edit Harddisk Detail</span>
+         
+
+        </mat-toolbar>
       </div>
       <br>
       <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" (ngSubmit)="editharddisk(harddiskform.value)">
@@ -56,12 +61,16 @@
       <mat-error *ngIf="!harddiskform.controls['serialno'].valid">Serial No is required </mat-error>
     </mat-form-field>
 </p>
+<br>
+    <div class="button" style="margin-right: 7%;margin-top:-1%;">
+        <button type="submit" class="button-row" mat-raised-button color="primary" (click)=cancel()>Cancel</button>
+    </div>
 
 
-
-      <div class="button">
+      <div class="button" style="margin-right: -10%;margin-top:-2%;">
         <button type="submit" class="button-row" mat-raised-button disabled color="primary" [disabled]="!harddiskform.valid">Save</button>
     </div>
+
 
       </form>
     </mat-card-content>

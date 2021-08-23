@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../service/auth.service';
+import { DashboardComponent } from './../dashboard/dashboard.component';
+import { Component, OnInit,Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialogRef ,MAT_DIALOG_DATA} from '@angular/material/dialog';
+import firebase from 'firebase/app'
+
+
+
+
 @Component({
   selector: 'app-entrydetail',
   templateUrl: './entrydetail.component.html',
@@ -9,59 +17,102 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class EntrydetailComponent implements OnInit {
   
-  db:AngularFirestore;
-   hide:boolean = true;
-   error ='';
-   message='';
-   harddiskid='';
-   record:any;
+  hide:boolean=true;
+  harddiskid="";
+  userdetail:any;
+  useruid:any;
+  // minDate = new Date().toISOString().slice(0, 16);
+  // maxDate = new Date().toISOString().slice(0, 16) ;
+  // maxDate:Date;
 
-   harddiskform: FormGroup = this.formbuilder.group({
-    harddiskno:["",{validators:[Validators.required],updateOn:"change"}],
-    harddiskname:["",{validators:[Validators.required],updateOn:"change"}],
-    purpose:["",{validators:[Validators.required],updateOn:"change"}],
-    personname:["",{validators:[Validators.required],updateOn:"change"}],
-    entrydate:["",{validators:[Validators.required],updateOn:"change"}],
-    
-   });
 
-  //  floatLabelControl = new FormControl('auto');
+  harddiskform:FormGroup;//kar
+  
   constructor(
-    db:AngularFirestore,
-    private fb: FormBuilder,
-    public firestore:AngularFirestore,
+    @Inject(MAT_DIALOG_DATA)public data: any,
+    public dialogref:MatDialogRef<EntrydetailComponent>, //fordialog open and close we use dialogRef
     public router:Router,
-    public route:ActivatedRoute,
-    public formbuilder: FormBuilder)
-      
-   {this.db=db; }
-
-  ngOnInit(): void {
-    console.log(this.route.snapshot.params.id); // route:router this for navigate,snapshot means it will show updated value,                                    // params means parameters we can give own name,id means it call from parameter
-    this.harddiskid=this.route.snapshot.params.id; 
-
-
-    this.db.collection("Harddisk").doc(this.harddiskid).get().toPromise().then((doc) => { // we set name called result
-    this.record=doc.data()
-    console.log(doc.data())
+    public authservice:AuthService,
+    private firestore:AngularFirestore,
+    private formbuilder:FormBuilder,
+    
+  ){
+   
+  
+    // console.log(new Date(this.minDate));
+    // console.log(firebase.firestore.Timestamp.fromDate(new Date(this.minDate)));
+    // let d = firebase.firestore.Timestamp.fromDate(new Date())
+    // console.log(d.toDate());
+   
+    
+    
+    
+    this.harddiskform=this.formbuilder.group({
+      purpose:["",{validators:[Validators.required],updateOn:"change"}],
+      entrydate:["",{validators:[Validators.required,Validators.max],updateOn:"change"}]
+    });
 
     
-      this.harddiskform.patchValue({
-        harddiskno:this.record.harddiskno,
-        harddiskname:this.record.harddiskname,
+
+    this.authservice.userdata.then(auth =>{
+      console.log(auth.uid);
+      this.useruid =auth.uid
+
+      this.firestore.collection("userRegister", ref=>ref.where("uid", "==", this.useruid)).valueChanges().subscribe( require => {
+        console.log(require);
+        
+          require.forEach(doc => {
+          this.userdetail=doc
+    
+          console.log(this.userdetail);
+
+    }) 
+    
+        
       })
-    });
+    })
+
+    // console.log(this.authservice.authState.uid);
+    
+  
+   
   }
+
+  ngOnInit():void{
+    console.log("ID :",this.data.id);
+    
+    this.harddiskid=this.data.id;
+     
+
+      
+   let d = new Date().toISOString().slice(0,10)
+   this.harddiskform.patchValue({
+   entrydate:d
+ })
+   this.harddiskform.get('entrydate').disable()
+  }
+
   entrydetail(value:any){
     console.log(value);
-    this.db.collection("/Harddisk").doc(this.harddiskid).update(
-      this.harddiskform.value
-    ).then(() =>{
-    }).catch(error => {
-      console.error("Error",error);
+    this.firestore.collection("/Harddisk").doc(this.harddiskid).update({
+      name:this.userdetail.name,
+      purpose:value.purpose,
+      entrydate:new Date().toISOString(),
+      availability:false,
+    }).then(()=>{
+      alert("Harddisk update");
+      console.log("Success")
+      this.dialogref.close();
+    }).catch(error =>{
+      console.error("error");
+      alert("error")
     });
-    alert("Harddisk data updated");
-    this.router.navigateByUrl("/dashboard");
+    this.router.navigateByUrl("/adm/dashboard");
+    
   }
+  cancel(){
+    this.dialogref.close();
+  }
+      //new Date(this.date)
  }
 

@@ -20,6 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+
 import { MatTableModule} from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -36,6 +38,9 @@ import { EditharddiskdetailComponent } from './editharddiskdetail/editharddiskde
 import { ViewharddiskdetailComponent } from './viewharddiskdetail/viewharddiskdetail.component';
 import { EntrydetailComponent } from './entrydetail/entrydetail.component';
 import { ReturndetailComponent } from './returndetail/returndetail.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 
 @NgModule({
@@ -50,6 +55,8 @@ import { ReturndetailComponent } from './returndetail/returndetail.component';
     ViewharddiskdetailComponent,
     EntrydetailComponent,
     ReturndetailComponent,
+    SidenavComponent,
+    InventoryComponent,
 
 
   ],
@@ -77,6 +84,8 @@ import { ReturndetailComponent } from './returndetail/returndetail.component';
     MatSortModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatSidenavModule,
+    MatListModule,
     
 
   ],

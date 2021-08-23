@@ -66,6 +66,8 @@ export class ViewharddiskdetailComponent implements OnInit {
     });
   
     }
-
+    back(){
+      this.router.navigateByUrl(`/adm/dashboard`)
+    }
 
 }

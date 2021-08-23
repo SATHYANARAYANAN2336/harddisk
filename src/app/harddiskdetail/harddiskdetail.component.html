@@ -1,16 +1,22 @@
 <mat-card>
     <mat-card-content>
-      <div class="header">
-        Hard-Disk Details
+      <div class="header" style="font-weight: 1000;" >
+        <mat-toolbar>
+         <span style="margin:auto; display:table;">
+          Harddisk Register</span>
+        </mat-toolbar>
       </div>
       <br>
       <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" (ngSubmit)="harddisk(harddiskform.value)">
 <p>
           <mat-form-field appearance="fill" class="username">
             <mat-label>Hard Disk No</mat-label>
-            <input matInput type="text" name="name" formControlName="harddiskno" placeholder="please Enter Hard disk No"required/>
+            <input matInput type="text" name="name" formControlName="harddiskno" (change)="onChangeEvent($event)" placeholder="please Enter Hard disk No"required/>
             <mat-error *ngIf="!harddiskform.controls['harddiskno'].valid">Hard Disk No is required </mat-error>
-          </mat-form-field>
+          </mat-form-field> <br>
+         
+          <small>{{this.match_msg}}</small>
+
 </p>
 
 <p>
@@ -52,17 +58,23 @@
 <p>
     <mat-form-field appearance="fill" class="number"  >
       <mat-label> Serial No</mat-label>
-      <input matInput type="text" name="number" formControlName="serialno" placeholder="please Enter Serial No  "required/>
+      <input matInput type="text" name="number" (change)="onChangeserial($event)" formControlName="serialno" placeholder="please Enter Serial No  "required/>
       <mat-error *ngIf="!harddiskform.controls['serialno'].valid">Serial No is required </mat-error>
-    </mat-form-field>
+    </mat-form-field><br>
+         
+    <small>{{this.matche_msg}}</small>
 </p>
+   
+    
+    <div class="button" style="margin-right: 7%;margin-top:2%;">
+        <button type="submit" class="button-row" mat-raised-button color="primary" (click)=cancel()>Cancel</button>
+    </div>
 
-
-
-      <div class="button">
-        <button type="submit" class="button-row" mat-raised-button disabled color="primary" [disabled]="!harddiskform.valid">Submit</button>
+      <div class="button" style="margin-right: -8%;margin-top:-2%;">
+        <button type="submit" class="button-row" mat-raised-button color="primary" [disabled]="!harddiskform.valid">Submit</button>
     </div>
 
       </form>
+
     </mat-card-content>
   </mat-card>

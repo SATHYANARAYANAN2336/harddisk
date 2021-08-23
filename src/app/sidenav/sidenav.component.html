@@ -1,0 +1,49 @@
+<mat-toolbar color="primary"> <!--We use mat toolbar above the mat-drawer-container thren only it show in proper way...-->
+
+
+    <button mat-icon-button class="example-icon" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+    </button>
+
+    <span style="flex: 1 1 auto"></span>
+  <span>HARD-DISK DASHBOARD</span>
+
+  <span  style="flex: 1 1 auto"></span>
+
+  
+  <button mat-icon-button (click)="logout()">
+    <mat-icon >logout</mat-icon>
+  </button>
+
+</mat-toolbar>
+
+<mat-drawer-container>
+    <mat-drawer style="width: 200px;" mode="side" opened #sidenav>
+        <mat-action-list style="font-size: x-large;">
+      
+          
+         <ng-container >
+             <a  mat-list-item (click)="dashboard()">Available HarddiskList </a>
+
+             <!-- <a  mat-list-item routerLink="/adm/dashboard">Available HarddiskList </a> -->
+             </ng-container>
+                <br>
+             <ng-container>
+             <a  mat-list-item (click)="inventory()">My Inventory </a>
+
+           <!-- <a  mat-list-item routerLink="/adm/inventory">My Inventory </a> -->
+ 
+         </ng-container>
+         <br>
+ 
+         <a mat-list-item (click)="logout()" mat-list-item>Logout</a>        
+        
+ 
+        </mat-action-list>
+        </mat-drawer>
+ 
+        
+        <div style="height: 100vh;">
+         <router-outlet></router-outlet> 
+       </div>
+   </mat-drawer-container>

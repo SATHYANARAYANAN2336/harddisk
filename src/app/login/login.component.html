@@ -1,13 +1,16 @@
-<mat-card>
-    <mat-card-content>
-      <div class="header">
-        Login
-      </div>
 
+
+        <mat-toolbar>
+          <span style="margin:auto; display:table;">
+            Login
+        </span>
+        </mat-toolbar>
+      
+      <mat-card>
       <form autocomplete="off" class="loginform" [formGroup] = "loginform" (ngSubmit)="login(loginform.value)">
         <br>
         <p>
-          <mat-form-field class="fullwidth" appearance="fill">
+          <mat-form-field class="fullwidth" appearance="outline" style= "width: 14%">
             <mat-label>Email</mat-label>
             <input type="text" name="email" class="mail" formControlName="email" matInput placeholder="Enter Email ID " required/>
             <mat-error *ngIf="!loginform.controls['email'].valid">Email ID is required </mat-error>
@@ -15,7 +18,7 @@
         </p>
 
         <p>
-          <mat-form-field class="full-width" appearance="fill" style= "width: 14%">
+          <mat-form-field class="full-width" appearance="outline" style= "width: 14%">
             <mat-label>Password</mat-label>
             <input type="password" name="password"  class="form-control" formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
             <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
@@ -28,7 +31,7 @@
       </p>
      
         <p>
-        <button type="submit" class="button-row" mat-raised-button color="primary" [disabled]="!loginform.valid">Login</button>
+        <button type="submit" class="button-row" mat-raised-button color="primary" [disabled]="!loginform.valid" >Login</button>
         </p>
 
         <p>
@@ -38,5 +41,4 @@
 
       </form>
 
-    </mat-card-content>
   </mat-card>
