@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     db:AngularFirestore,
-    private fb: FormBuilder,
     public firestore: AngularFirestore,
     public auth: AngularFireAuth,
     public router: Router,

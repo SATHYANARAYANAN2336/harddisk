@@ -28,11 +28,12 @@ export class AuthService implements CanActivate{
      this.afu.authState.subscribe((auth =>{
         this.authState = auth;
         // console.log(this.authState.uid)
+        this.userdata = this.afu.authState.pipe(first()).toPromise() //userdata = whenever it call
+        console.log(this.userdata);
       
       }))
 
-   this.userdata = this.afu.authState.pipe(first()).toPromise() //userdata = whenever it call
-   console.log(this.userdata);
+  
    
   }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -202,3 +203,4 @@ registerWithEmail( email: string, password: string ) {
 //   //   return roles
 //   // }
 // }
+

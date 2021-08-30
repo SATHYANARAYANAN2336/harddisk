@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { EntrydetailComponent } from '../entrydetail/entrydetail.component';
 import { ReturndetailComponent } from '../returndetail/returndetail.component';
 import { AuthService } from '../service/auth.service';
@@ -31,15 +31,17 @@ export class InventoryComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+    }
   constructor(private dialog:MatDialog,private angularFirestore: AngularFirestore,
     private router:Router,private authservice : AuthService) {
     this.authservice.userdata.then( auth => {
       console.log(auth.uid);
       this.useruid = auth.uid
+      
+      
     })
   
-     }
+    }
 
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class InventoryComponent implements OnInit {
           
       ///
        this.angularFirestore.collection("Harddisk", ref=>ref.where("availability", "==", false).where("name","==",this.username)).valueChanges().subscribe(async res=>
-      {
+       {
         console.log(res);
         this.harddisklist=res;
         await this.angularFirestore.collection("return-history",ref=>ref.where("uid","==",this.useruid)).get().toPromise().then(snap => {
@@ -70,17 +72,17 @@ export class InventoryComponent implements OnInit {
         
         
         this.mergeddata = [...this.harddisklist,...this.returnhistorylist] //spread operator array irukura all object
-        console.log(this.mergeddata);
+        console.log(this.mergeddata)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
         
         this.dataSource=new MatTableDataSource(this.mergeddata);
         console.log(this.dataSource);
 
         this.dataSource.paginator =this.paginator;
         this.dataSource.sort=this.sort;
-      });
+            });
       
       
-    })
+       })
 
   })
     
@@ -138,4 +140,4 @@ export class InventoryComponent implements OnInit {
     
 
 
-  }
+}
