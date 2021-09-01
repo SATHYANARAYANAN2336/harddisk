@@ -41,6 +41,9 @@ import { ReturndetailComponent } from './returndetail/returndetail.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { HarddisklistComponent } from './harddisklist/harddisklist.component';
+import { HistoryComponent } from './history/history.component';
+import { HarddiskinuseComponent } from './harddiskinuse/harddiskinuse.component';
 
 
 @NgModule({
@@ -57,6 +60,9 @@ import { InventoryComponent } from './inventory/inventory.component';
     ReturndetailComponent,
     SidenavComponent,
     InventoryComponent,
+    HarddisklistComponent,
+    HistoryComponent,
+    HarddiskinuseComponent,
 
 
   ],

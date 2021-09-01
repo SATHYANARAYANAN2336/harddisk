@@ -99,6 +99,7 @@ export class EntrydetailComponent implements OnInit {
       purpose:value.purpose,
       entrydate:new Date().toISOString(),
       availability:false,
+      use:false,
     }).then(()=>{
       alert("Harddisk update");
       console.log("Success")

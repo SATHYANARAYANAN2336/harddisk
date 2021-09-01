@@ -20,7 +20,7 @@ export class InventoryComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild(MatSort) sort!:MatSort;
 
-  displayedColumns:string[] =['harddiskname','harddiskno','purpose','entrydate','return']; //'entry','returndate','edit','view','delete',
+  displayedColumns:string[] =['harddiskno','harddiskname','purpose','entrydate','return']; //'entry','returndate','edit','view','delete',
   dataSource:any;
   harddisklist:any;
   returnhistorylist = []

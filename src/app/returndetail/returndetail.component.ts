@@ -100,6 +100,7 @@ export class ReturndetailComponent implements OnInit {
        entrydate:"",
        returndate:"",
        availability:true,
+       use:true,
       })
     }).catch(error => {
       console.error("Error",error);

@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild(MatSort) sort!:MatSort;
 
-  displayedColumns:string[] =['harddiskname','harddiskno','entry']; //'entrydate','returndate','return','edit','view','delete',
+  displayedColumns:string[] =['harddiskno','harddiskname','entry']; //'entrydate','returndate','return','edit','view','delete',
   dataSource:any;
   harddisklist:any;
   disk:any;
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     
     onrowadd(id:any){
       console.log(id);
-      this.router.navigateByUrl(`/harddisk`)
+      this.router.navigateByUrl(`adm/harddisk`)
       
     }
 

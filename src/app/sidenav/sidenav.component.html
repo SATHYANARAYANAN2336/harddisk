@@ -20,23 +20,38 @@
 <mat-drawer-container>
     <mat-drawer color="primary" style="width: 200px;" mode="side" opened #sidenav>
         <mat-action-list style="font-size: x-large;">
-      
-          
-         <ng-container >
-             <a  mat-list-item (click)="dashboard()">Available HarddiskList </a>
+        <ng-container>
+          <a mat-list-item (click)="harddisk()">Add New Harddisk</a>
+        </ng-container>  
+        <ng-container>
+          <a mat-list-item (click)="harddisklist()">Harddisk List</a>
+        </ng-container>
+        
+        <ng-container >
+        <a  mat-list-item (click)="dashboard()">Available HarddiskList </a>
 
              <!-- <a  mat-list-item routerLink="/adm/dashboard">Available HarddiskList </a> -->
-             </ng-container>
-                <br>
-             <ng-container>
-             <a  mat-list-item (click)="inventory()">My Inventory </a>
+        </ng-container>
+        
+        <ng-container>
+        <a  mat-list-item (click)="inventory()">My Inventory </a>
 
            <!-- <a  mat-list-item routerLink="/adm/inventory">My Inventory </a> -->
  
-         </ng-container>
-         <br>
- 
-         <a mat-list-item (click)="logout()" mat-list-item>Logout</a>        
+        </ng-container>
+        
+
+        
+        <ng-container>
+          <a mat-list-item (click)="harddiskinuse()">Harddisk in Use</a>
+        </ng-container>
+        
+        <ng-container>
+          <a mat-list-item (click)="history()">History</a>
+        </ng-container>
+        
+        <a mat-list-item (click)="logout()" mat-list-item>Logout</a>
+                
         
  
         </mat-action-list>

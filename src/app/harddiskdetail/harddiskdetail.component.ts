@@ -108,6 +108,7 @@ harddisk(value:any){
     "serialno":value.serialno,
     "returndate":"", //*****refer inventory html if condition */
     "availability":true,
+    "use":true,
     "addedon":firebase.default.firestore.FieldValue.serverTimestamp()
   }).then(() =>{
     this.harddiskform.reset()

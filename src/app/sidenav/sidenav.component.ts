@@ -21,10 +21,22 @@ export class SidenavComponent implements OnInit {
     
         
   }
+  harddisk(){
+    this.router.navigateByUrl('/adm/harddisk')
+  }
   dashboard(){
         this.router.navigateByUrl('/adm/dashboard')
   }
   inventory(){
     this.router.navigateByUrl('/adm/inventory')
+  }
+  harddisklist(){
+    this.router.navigateByUrl('/adm/harddisklist')
+  }
+  harddiskinuse(){
+    this.router.navigateByUrl('/adm/harddiskinuse')
+  }
+  history(){
+    this.router.navigateByUrl('/adm/history')
   }
 }
