@@ -21,7 +21,8 @@
           <mat-form-field appearance="outline" style= "width: 14%"  >
             <mat-label>Mobile</mat-label>
             <input matInput type="tel" maxlength="10" pattern="^\d{10}$" name="number" formControlName="number" placeholder="please enter mobile number"required/>
-            <mat-error *ngIf="!registerform.controls['number'].valid">Mobile Number is required </mat-error>
+            <mat-error *ngIf="registerform.controls['number'].hasError('required')">Mobile Number is required </mat-error>
+            <mat-error *ngIf="registerform.controls['number'].hasError('minlength')">Mobile Number must be 10 required</mat-error>
           </mat-form-field>
 </p>
 <p>
@@ -31,39 +32,18 @@
             <mat-error *ngIf="!registerform.controls['email'].valid">Email is required</mat-error>
           </mat-form-field>
 </p>
-<!-- <p>
-        <mat-form-field appearance="fill" style= "width: 14%">
-            <mat-label>Password</mat-label>
-            <input type="password" name="password"  class="form-control" formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
-              <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
-                  [attr.aria-pressed]="hide">
-                  <mat-icon> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            <mat-error *ngIf="!registerform.controls['password'].valid">Password is required</mat-error>
-        </mat-form-field>
-</p>
 
-<p>
-  <mat-form-field appearance="fill" style= "width: 14%">
-      <mat-label>Confirm Password</mat-label>
-      <input type="password" name="confirmpassword"  class="form-control" formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
-        <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
-            [attr.aria-pressed]="hide">
-            <mat-icon> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      <mat-error *ngIf="!registerform.controls['password'].valid">Confirm Password is required</mat-error>
-  </mat-form-field>
-</p> -->
 
 <p>
   <mat-form-field appearance="outline" class="register" >
     <mat-label> Password</mat-label>
     <input type="password" name="password"  formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
-    <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+    <button type="button"  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
     [attr.aria-pressed]="hide">
     <mat-icon> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 </button>
-<mat-error *ngIf="!registerform.controls['password'].valid">Confirm Password is required</mat-error>
+<mat-error *ngIf="registerform.controls['password'].hasError('required')">Password is required</mat-error>
+<mat-error *ngIf="registerform.controls['password'].hasError('minlength')">Minimum 6 character required</mat-error>
 </mat-form-field>
 </p>
 
@@ -71,7 +51,7 @@
   <mat-form-field appearance="outline" class="register" >
     <mat-label>Confirm Password</mat-label>
      <input type="password" name="confirmpassword" formControlName="confirmpassword" (keyup)="checkpassword()" matInput [type]=" hide ? 'password' : 'text'" required />
-     <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+     <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
       [attr.aria-pressed]="hide">
      <mat-icon> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
      </button>

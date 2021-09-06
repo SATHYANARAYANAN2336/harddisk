@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-        this.angularFirestore.collection("Harddisk", ref=>ref.where("availability", "==", true)).valueChanges().subscribe(res=>
+        this.angularFirestore.collection("Harddisk", ref=>ref.where("block","==",false)).valueChanges().subscribe(res=>
           {
             console.log(res);
             this.harddisklist=res;

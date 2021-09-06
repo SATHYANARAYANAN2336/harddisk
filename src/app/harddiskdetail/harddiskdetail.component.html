@@ -1,12 +1,12 @@
-<mat-card>
-    <mat-card-content>
+
       <div class="header" style="font-weight: 1000;" >
         <mat-toolbar>
          <span style="margin:auto; display:table;">
-          Harddisk Register</span>
+          HARDDISK REGISTER</span>
         </mat-toolbar>
       </div>
       <br>
+      <div class="style" style="text-align: center;">
       <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" (ngSubmit)="harddisk(harddiskform.value)">
 <p>
           <mat-form-field appearance="fill" class="username">
@@ -64,6 +64,7 @@
          
     <small>{{this.matche_msg}}</small>
 </p>
+
    
     
     <div class="button" style="margin-right: 7%;margin-top:2%;">
@@ -78,6 +79,4 @@
       <br>
       <br>
       </form>
-
-    </mat-card-content>
-  </mat-card>
+      </div>

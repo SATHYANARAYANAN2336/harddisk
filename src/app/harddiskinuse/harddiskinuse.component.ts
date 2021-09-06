@@ -23,7 +23,6 @@ export class HarddiskinuseComponent implements OnInit {
   harddisklist:any;
   returnhistorylist = []
   username
-  useruid
 
   
 
@@ -46,13 +45,14 @@ export class HarddiskinuseComponent implements OnInit {
     });
 
 
-    this.angularFirestore.collection("Harddisk",ref => ref.where("use","==",false) ).valueChanges().subscribe(res=>
+    this.angularFirestore.collection("Harddisk",ref => ref.where("block","==",true)).valueChanges().subscribe(res=>
       {
-        this.harddisklist=[ ]
+        // this.harddisklist=[ ]
        console.log(res);
        this.harddisklist=res;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
        
-       this.dataSource=this.harddisklist;
+       this.dataSource=new MatTableDataSource
+       (this.harddisklist);
        console.log(this.dataSource);
 
        this.dataSource.paginator =this.paginator;
@@ -60,17 +60,6 @@ export class HarddiskinuseComponent implements OnInit {
            });
    }
 
-  ngOnInit(): void {
-
-    
-      
-    this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.useruid)).get().toPromise().then( snap => {
-      console.log(snap);
-        snap.forEach(doc => {
-          console.log(doc.data()); //we need to check
-          this.username = doc.data()
-        });
-       });   
-    }
+  ngOnInit(): void {}
 
 }

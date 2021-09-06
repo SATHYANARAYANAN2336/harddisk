@@ -1,8 +1,14 @@
-
+<div class="header" style="font-weight: 1000;" >
+    <mat-toolbar>
+     <span style="margin:auto; display:table;">
+      HARDDISK IN USE</span>
+    </mat-toolbar>
+  </div>
 <mat-form-field appearance="standard">
     <mat-label>FilterBy</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Enter Person Name" #input>
   </mat-form-field>
+  
   <div class="mat-elevation-z8">
     <table mat-table  [dataSource]="dataSource" matSort>  
 

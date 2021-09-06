@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import  { AngularFirestore} from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-harddiskdetail',
@@ -10,7 +11,6 @@ import * as firebase from 'firebase';
   styleUrls: ['./harddiskdetail.component.css']
 })
 export class HarddiskdetailComponent implements OnInit {
-   db:AngularFirestore;
    hide:boolean = true;
    error ='';
    message='';
@@ -22,6 +22,7 @@ export class HarddiskdetailComponent implements OnInit {
    matche_valid:Boolean=false;
    matche_msg: any;
    item:any;
+   userdata
 
 
    harddiskform: FormGroup = this.formbuilder.group({
@@ -40,24 +41,29 @@ export class HarddiskdetailComponent implements OnInit {
   //  floatLabelControl = new FormControl('auto');
 
   constructor(
-    db:AngularFirestore,
+    public db:AngularFirestore,
     private fb: FormBuilder,
     public firestore:AngularFirestore,
     public router:Router,
-    public formbuilder: FormBuilder){
-      this.db=db;
-      this.db.collection('Harddisk').get().toPromise().then( snap =>{
-        console.log(snap);
-
-        snap.forEach(doc => {
-          console.log(doc.id);
-
-          this.array.push(doc.data())
-        })
-        console.log(this.array);
-      })
-    
+    public formbuilder: FormBuilder,
+    public authservice:AuthService){
+      console.log(this.authservice.uid);
       
+      db.collection('userRegister',ref => ref.where("uid","==",this.authservice.uid)).get().toPromise().then(snap =>
+        {
+          console.log(snap);
+          snap.forEach(doc =>
+            {
+              console.log(doc.data()['admin']); //we get admin data...
+              if(!doc.data()['admin']){
+                this.router.navigateByUrl("/adm/dashboard")
+              }
+            })
+
+            
+        })
+        
+
      }
 
   ngOnInit(): void {
@@ -107,8 +113,9 @@ harddisk(value:any){
     "capacity":value.capacity,
     "serialno":value.serialno,
     "returndate":"", //*****refer inventory html if condition */
-    "availability":true,
-    "use":true,
+    // "availability":true,
+    // "use":true,
+    "block":false,
     "addedon":firebase.default.firestore.FieldValue.serverTimestamp()
   }).then(() =>{
     this.harddiskform.reset()
@@ -139,7 +146,7 @@ harddisk(value:any){
     {
       this.match_valid=false;
       console.log();
-      return this.match_msg=" New Harddiskno Created";
+      return this.match_msg=" New Harddisknumber Created";
       
     }
 
@@ -181,3 +188,21 @@ harddisk(value:any){
   ///
  
 }
+
+
+
+/*
+
+      db.collection('Harddisk').get().toPromise().then( snap =>{
+        console.log(snap);
+
+        snap.forEach(doc => {
+          console.log(doc.id);
+
+          this.array.push(doc.data())
+        })
+        console.log(this.array);
+      })
+     
+      
+ */

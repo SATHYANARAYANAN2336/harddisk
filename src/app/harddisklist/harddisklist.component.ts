@@ -19,7 +19,7 @@ export class HarddisklistComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild(MatSort) sort!:MatSort;
 
-  displayedColumns:string[] =['harddiskno','harddiskname','block','unblock']; 
+  displayedColumns:string[] =['harddiskno','harddiskname','block']; 
   dataSource:any;
   harddisklist:any;
   returnhistorylist = []
@@ -36,6 +36,38 @@ export class HarddisklistComponent implements OnInit {
     private router:Router,private authservice : AuthService) { }
 
   ngOnInit(): void {
+
+    this.angularFirestore.collection("Harddisk").valueChanges().subscribe(res=>
+      {
+        console.log(res);
+        this.harddisklist=res;
+        this.dataSource=new MatTableDataSource(this.harddisklist);
+        console.log(this.dataSource);
+
+        this.dataSource.paginator =this.paginator;
+        this.dataSource.sort=this.sort;
+      });
+  }
+
+  check(event:any,id)
+  {
+    console.log(id);
+    console.log(event.checked);
+
+    if(event.checked==true)
+    {
+      this.angularFirestore.collection("Harddisk").doc(id).update({
+        block:true
+      });
+    }
+    if(event.checked==false)
+    {
+      this.angularFirestore.collection("Harddisk").doc(id).update({
+        block:false
+      });
+    }
+    
+    
   }
 
   onrowblock(){

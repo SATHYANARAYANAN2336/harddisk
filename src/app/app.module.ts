@@ -21,6 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { MatTableModule} from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
@@ -44,7 +45,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { HarddisklistComponent } from './harddisklist/harddisklist.component';
 import { HistoryComponent } from './history/history.component';
 import { HarddiskinuseComponent } from './harddiskinuse/harddiskinuse.component';
-
+import { RolesComponent } from './roles/roles.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { HarddiskinuseComponent } from './harddiskinuse/harddiskinuse.component'
     HarddisklistComponent,
     HistoryComponent,
     HarddiskinuseComponent,
-
+    RolesComponent
 
   ],
 
@@ -92,6 +93,7 @@ import { HarddiskinuseComponent } from './harddiskinuse/harddiskinuse.component'
     MatDialogModule,
     MatSidenavModule,
     MatListModule,
+    MatProgressBarModule,
     
 
   ],

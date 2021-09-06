@@ -22,8 +22,8 @@ export class RegisterComponent implements OnInit {
     name: [, { validators: [Validators.required], updateOn: "change" }],
     number: [, { validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)], updateOn: "change" }],
     email: [, { validators: [Validators.required, Validators.email], updateOn: "change" }],
-    password: [, { validators: [Validators.required, Validators.minLength(8)], updateOn: "change" }],
-    confirmpassword: [, { validators: [Validators.required, Validators.minLength(8)], updateOn: "change" }],
+    password: [, { validators: [Validators.required, Validators.minLength(6)], updateOn: "change" }],
+    confirmpassword: [, { validators: [Validators.required, Validators.minLength(6)], updateOn: "change" }],
   });
 
   // floatLabelControl = new FormControl('auto');
@@ -41,18 +41,25 @@ export class RegisterComponent implements OnInit {
     }
 
   register(value:any) {
+    if(this.registerform.valid){
+      
+    
     console.log("this document created",value);
        this.authservice.registerWithEmail(value.email, value.password)
           .then((v) => {
             console.log(v.user.uid);
-            
+            // if(this.registerform.valid){
+            //   return;
+            // }
             this.onSubmit(value,v.user.uid)
             // this.message = "you are register with data on firebase"
             this.router.navigate(['/login'])
-          }).catch(_error => { alert("Email ID already in use")
+          }).catch(_error => { 
+            alert(_error.message)
             this.error = _error
             this.router.navigate(['/register'])
           })
+        }
   }
 
 
@@ -74,7 +81,6 @@ export class RegisterComponent implements OnInit {
       name:value.name,
       number:value.number,
       email:value.email,
-     
     })
     .then(() => {
       console.log("successfully submitted");

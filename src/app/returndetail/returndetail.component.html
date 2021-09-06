@@ -12,7 +12,7 @@
 <p>
     <mat-form-field appearance="fill" class="number"  >
       <mat-label>Return date</mat-label>
-      <input matInput type="date" name="number"[disabled]="true" formControlName="returndate" placeholder="dd-MM-yyyy hh:mm"required/>
+      <input matInput type="date" [disabled]="true" formControlName="returndate" placeholder="dd-MM-yyyy hh:mm"required/>
       <mat-error *ngIf="!harddiskform.controls['returndate'].valid">Return date is required </mat-error>
     </mat-form-field>
 </p>

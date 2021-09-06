@@ -1,3 +1,4 @@
+import { RolesComponent } from './roles/roles.component';
 import { HistoryComponent } from './history/history.component';
 import { HarddisklistComponent } from './harddisklist/harddisklist.component';
 import { AuthService } from './service/auth.service';
@@ -20,21 +21,23 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'adm', component:SidenavComponent,canActivate:[AuthService], children:[
-  { path:'dashboard', component:DashboardComponent,canActivate:[AuthService] },
-  { path:'inventory',component:InventoryComponent,canActivate:[AuthService]},
-  { path:'harddisklist',component:HarddisklistComponent,canActivate:[AuthService]},
-  { path:'harddiskinuse',component:HarddiskinuseComponent,canActivate:[AuthService]},
-  { path:'history',component:HistoryComponent,canActivate:[AuthService]},
-  { path: 'harddisk',component:HarddiskdetailComponent,canActivate:[AuthService]},
+    { path: '',redirectTo: '/adm/dashboard', pathMatch: 'full' },
+    { path:'dashboard', component:DashboardComponent,canActivate:[AuthService] },
+    { path:'inventory',component:InventoryComponent,canActivate:[AuthService]},
+    { path:'harddisklist',component:HarddisklistComponent,canActivate:[AuthService]},
+    { path:'harddiskinuse',component:HarddiskinuseComponent,canActivate:[AuthService]},
+    { path:'history',component:HistoryComponent,canActivate:[AuthService]},
+    { path: 'harddisk',component:HarddiskdetailComponent,canActivate:[AuthService]},
+    {path:'entrydetail/:id', component:EntrydetailComponent,canActivate:[AuthService]},
+    {path:'returndetail/:id', component:ReturndetailComponent,canActivate:[AuthService]},
   ]},
   
   { path:'editharddiskdetail/:id', component:EditharddiskdetailComponent},
   { path:'viewharddiskdetail/:id', component:ViewharddiskdetailComponent},
-  {path:'entrydetail/:id', component:EntrydetailComponent},
-  {path:'returndetail/:id', component:ReturndetailComponent},
+  
   { path: 'login', component: LoginComponent },
-  { path:'sidenav', component:SidenavComponent,canActivate:[AuthService] }
-
+  { path:'sidenav', component:SidenavComponent,canActivate:[AuthService] },
+  { path: 'roles', component: RolesComponent },
 ];
 
 @NgModule({

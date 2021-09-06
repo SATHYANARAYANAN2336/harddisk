@@ -1,0 +1,9 @@
+.mat-drawer {
+    background-color: #89b1ee85;
+    color: rgba(0,0,0,.87);
+}
+.mat-toolbar.mat-primary {
+    background: rgb(0 0 0 / 87%);
+    color: #fff;
+    font-style: inherit;
+}

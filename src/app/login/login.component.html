@@ -13,7 +13,9 @@
           <mat-form-field class="fullwidth" appearance="outline" style= "width: 14%">
             <mat-label>Email</mat-label>
             <input type="text" name="email" class="mail" formControlName="email" matInput placeholder="Enter Email ID " required/>
-            <mat-error *ngIf="!loginform.controls['email'].valid">Email ID is required </mat-error>
+            <mat-error *ngIf="loginform.controls['email'].hasError('required')">Email ID is required </mat-error>
+            <mat-error *ngIf="loginform.controls['email'].hasError('email')">Please enter valid email </mat-error>
+            
           </mat-form-field>
         </p>
 
@@ -21,12 +23,14 @@
           <mat-form-field class="full-width" appearance="outline" style= "width: 14%">
             <mat-label>Password</mat-label>
             <input type="password" name="password"  class="form-control" formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
-            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
             [attr.aria-pressed]="hide">
             <mat-icon> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-        <mat-error *ngIf="!loginform.controls['password'].valid">Password is required</mat-error>
-        </mat-form-field>
+        <mat-error *ngIf="loginform.controls['password'].hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="loginform.controls['password'].hasError('minlength')">Minimum 6 character required</mat-error>
+        
+      </mat-form-field>
 
       </p>
      

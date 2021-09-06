@@ -44,7 +44,7 @@ export class ReturndetailComponent implements OnInit {
       console.log(auth.uid);
       this.useruid = auth.uid;
 ///
-      this.firestore.collection("userRegister", ref=> ref.where("uid","==",this.useruid)).valueChanges().subscribe(require =>{
+      this.firestore.collection("userRegister", ref=> ref.where("uid","==",this.authservice.uid)).valueChanges().subscribe(require =>{
         console.log(require);
   
         require.forEach(doc =>{
@@ -61,6 +61,7 @@ export class ReturndetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
 
     let d = new Date().toISOString().slice(0,10)
    this.harddiskform.patchValue({
@@ -88,19 +89,21 @@ export class ReturndetailComponent implements OnInit {
       harddiskno:this.record.harddiskno,
       harddiskname:this.record.harddiskname,
       purpose:this.record.purpose,
-      entrydate:this.record.entrydate,
-      returndate:new Date().toISOString(), //new value
-      
+      entrydate:this.record.entrydate.toDate(),
+      returndate:new Date(), //new value
+      // block:this.record.block
       
     }).then(() =>{
       this.dialogref.close(DashboardComponent)
       this.firestore.collection("/Harddisk").doc(this.harddiskid).update({
-       name:"",
-       purpose:"",
-       entrydate:"",
-       returndate:"",
-       availability:true,
-       use:true,
+       name:null,
+       purpose:null,
+       entrydate:null,
+       returndate:null,
+       uid:null,
+       block:false,
+      //  availability:true,
+      //  use:true,
       })
     }).catch(error => {
       console.error("Error",error);

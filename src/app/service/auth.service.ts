@@ -25,13 +25,14 @@ export class AuthService implements CanActivate{
   constructor(private afu: AngularFireAuth, private router: Router
     ,private afs : AngularFirestore) { 
 
-     this.afu.authState.subscribe((auth =>{
-        this.authState = auth;
+    //  this.afu.authState.subscribe((auth =>{
+    //     this.authState = auth;
         // console.log(this.authState.uid)
         this.userdata = this.afu.authState.pipe(first()).toPromise() //userdata = whenever it call
         console.log(this.userdata);
       
-      }))
+      // }
+      // ))
 
   
    
@@ -66,7 +67,7 @@ export class AuthService implements CanActivate{
 
 
 
-registerWithEmail( email: string, password: string ) {
+  registerWithEmail( email: string, password: string ) {
     return this.afu.createUserWithEmailAndPassword( email, password)
       .then((user) => {
         this.authState = user
@@ -82,30 +83,25 @@ registerWithEmail( email: string, password: string ) {
   loginWithEmail(email: string, password: string)
   {
     return this.afu.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authState = user
-      })
-      .catch(error => {
-        console.log(error.message)
-        throw error.message
-      });
+      // .then((user) => {
+      //   this.authState = user
+      // })
+      // .catch(error => {
+      //   console.log(error.message)
+      //   throw error.message
+      // });
   }
 
-    signout(): void
+   async signout()
   {
     let out = confirm('are you sure want to logout')
-    console.log(out);
+     console.log(out);
      if(out){
-      this.afu.signOut();
+      await this.afu.signOut();
       this.router.navigate(['/login']);
      }
   }
   
-    
-    
-  
-
-
 }
 
 // import { Injectable } from '@angular/core';

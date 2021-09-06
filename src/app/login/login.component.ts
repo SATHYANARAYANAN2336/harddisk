@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   loginform: FormGroup = this.formbuilder.group({
     email: [, { validators: [Validators.required, Validators.email], updateOn: "change" }],
-    password: [, { validators: [Validators.required, Validators.minLength(8)], updateOn: "change" }],
+    password: [, { validators: [Validators.required, Validators.minLength(6)], updateOn: "change" }],
   })
 
   floatLabelControl = new FormControl('auto');
@@ -36,14 +36,24 @@ export class LoginComponent implements OnInit {
   }
 
   login(value:any) {
+    if(this.loginform.valid){
     console.log("this document created");
-       (this.authservice.loginWithEmail(value.email, value.password))
-          .then(() => {
+    this.authservice.loginWithEmail(value.email, value.password)
+          .then((result) => {
+            console.log(result.user.uid);
+            // this.db.collection("userRegister",ref => ref.where("uid","==",result.user.uid)).
+            // get().toPromise().then(data =>
+            //   {
+            //     console.log(data);
+                
+            //   })
             console.log("successfulley Submitted");
             this.router.navigate(['/adm/dashboard'])
-          }).catch(error => { alert("email ID does not exist")
+          }).catch(error => {
+             alert(error.message)
             console.error("Document Writing Error:",error.message);
           });
+        }
 
   }
 

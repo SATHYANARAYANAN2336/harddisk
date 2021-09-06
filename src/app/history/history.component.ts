@@ -32,66 +32,46 @@ export class HistoryComponent implements OnInit {
     }
   constructor(private dialog:MatDialog,private angularFirestore: AngularFirestore,
     private router:Router,private authservice : AuthService) {
-      this.authservice.userdata.then( auth => {
-      console.log(auth.uid);
-      this.useruid = auth.uid
+    //   this.authservice.userdata.then( auth => {
+    //   console.log(auth.uid);
+    //   this.useruid = auth.uid
       
       
-    })
+    // })
      }
 
   ngOnInit(): void {
-    this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.useruid)).get().toPromise().then( snap => {
-      console.log(snap);
-        snap.forEach(doc => {
-          console.log(doc.data()); //we need to check
-          this.username = doc.data()
-        });
-
-        ////
-         this.angularFirestore.collection("return-history",ref => ref.orderBy("returndate","desc")).get().toPromise().then(snap => {
-          this.returnhistorylist = [] //empty array beacuse duplicate will not be come
-          snap.forEach(doc => {
-               console.log(doc.data());
-               this.returnhistorylist.push(doc.data()) //we push doc.data() to returnhistorylist
-               
-          })
-
-          this.dataSource=this.returnhistorylist
-        });
-        ////
+    // this.authservice.getuid().then((x)=>{
+    //   console.log(x);
+    //   this.useruid=x
+      
+    //   this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.useruid)).get().toPromise().then( snap => {
+    //     console.log(snap);
+    //       snap.forEach(doc => {
+    //         console.log(doc.data()); //we need to check
+    //         this.username = doc.data()
+    //       });
+  
+    //       ////
           
-      ///
-      //  this.angularFirestore.collection("Harddisk", ref=>ref.where("use", "==", false)).valueChanges().subscribe(async res=>
-      //  {
-      //   console.log(res);
-      //   this.harddisklist=res;
-      //   await this.angularFirestore.collection("return-history").get().toPromise().then(snap => {
-      //     this.returnhistorylist = [] //empty array beacuse duplicate will not be come
-      //     snap.forEach(doc => {
-      //          console.log(doc.data());
-      //          this.returnhistorylist.push(doc.data()) //we push doc.data() to returnhistorylist
-               
-      //     })
+           
+          
+    // })
+    // })
 
-        
-        
-        
-      //   this.mergeddata = [...this.harddisklist,...this.returnhistorylist] //spread operator array irukura all object
-      //   console.log(this.mergeddata)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
-        
-      //   this.dataSource=new MatTableDataSource(this.mergeddata);
-      //   console.log(this.dataSource);
-
-      //   this.dataSource.paginator =this.paginator;
-      //   this.dataSource.sort=this.sort;
-      //       });
+    this.angularFirestore.collection("return-history",ref => ref.orderBy("returndate","desc")).get().toPromise().then(snap => {
+      this.returnhistorylist = [] //empty array beacuse duplicate will not be come
+      console.log(snap);
       
-      
-      //  });
-       ////
+      snap.forEach(doc => {
+           console.log(doc.data());
+           this.returnhistorylist.push(doc.data()) //we push doc.data() to returnhistorylist
+           
+      })
 
-  })
+      this.dataSource=new MatTableDataSource(this.returnhistorylist)
+    });
+    
 
 
   }

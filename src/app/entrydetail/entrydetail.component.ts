@@ -54,11 +54,9 @@ export class EntrydetailComponent implements OnInit {
 
     
 
-    this.authservice.userdata.then(auth =>{
-      console.log(auth.uid);
-      this.useruid =auth.uid
+    
 
-      this.firestore.collection("userRegister", ref=>ref.where("uid", "==", this.useruid)).valueChanges().subscribe( require => {
+      this.firestore.collection("userRegister", ref=>ref.where("uid", "==", this.authservice.uid)).valueChanges().subscribe( require => {
         console.log(require);
         
           require.forEach(doc => {
@@ -69,7 +67,7 @@ export class EntrydetailComponent implements OnInit {
     }) 
     
         
-      })
+      
     })
 
     // console.log(this.authservice.authState.uid);
@@ -97,9 +95,11 @@ export class EntrydetailComponent implements OnInit {
     this.firestore.collection("/Harddisk").doc(this.harddiskid).update({
       name:this.userdetail.name,
       purpose:value.purpose,
-      entrydate:new Date().toISOString(),
-      availability:false,
-      use:false,
+      entrydate:new Date(),
+      uid:this.userdetail.uid,
+      block:true
+      // availability:false,
+      // use:false,
     }).then(()=>{
       alert("Harddisk update");
       console.log("Success")
