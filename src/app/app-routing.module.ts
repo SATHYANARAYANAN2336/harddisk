@@ -1,3 +1,4 @@
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { RolesComponent } from './roles/roles.component';
 import { HistoryComponent } from './history/history.component';
 import { HarddisklistComponent } from './harddisklist/harddisklist.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: '',redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'resetpassword', component: ResetpasswordComponent},
   { path: 'adm', component:SidenavComponent,canActivate:[AuthService], children:[
     { path: '',redirectTo: '/adm/dashboard', pathMatch: 'full' },
     { path:'dashboard', component:DashboardComponent,canActivate:[AuthService] },

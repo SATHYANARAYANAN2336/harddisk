@@ -18,11 +18,11 @@
 </p>
 
 <p>
-    <mat-form-field appearance="fill" class="number"  >
-      <mat-label>Entry date</mat-label>
-      <input matInput type="date" [disabled]="true"   formControlName="entrydate"  placeholder="dd-MM-yyyy hh:mm"required/>
-      <mat-error *ngIf="!harddiskform.controls['entrydate'].valid">Entry date is required </mat-error>
-    </mat-form-field>
+    <mat-form-field appearance="fill" class="number"  > 
+      <mat-label>Entry On</mat-label> 
+      <input matInput type="datetime-local" formControlName="entrydate" required/>
+       <mat-error *ngIf="!harddiskform.controls['entrydate'].valid">Entry date is required </mat-error>
+     </mat-form-field> 
 </p>
 
 

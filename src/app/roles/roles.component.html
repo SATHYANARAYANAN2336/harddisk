@@ -4,25 +4,29 @@
 
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
+
+
+
+      <ng-container matColumnDef="checkbox">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> User </th>
+        <td mat-cell *matCellDef="let row"> 
+            <mat-checkbox [checked]="row.user" (change)="checkuser($event,row.id)" ></mat-checkbox>
+        </td>
+      </ng-container> 
+
         
-        <ng-container matColumnDef="checkbox">
+        <ng-container matColumnDef="checkbox1">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Admin </th>
             <td mat-cell *matCellDef="let row"> 
-                <mat-checkbox [checked]="row.admin" (change)="check($event,row.id)" [disabled]=" row.employee ===true ? false:true"></mat-checkbox>
+                <mat-checkbox [checked]="row.admin" (change)="check($event,row.id)" [disabled]=" row.user ===true ? false:true"></mat-checkbox>
             </td>
           </ng-container> 
 
-          <ng-container matColumnDef="checkbox1">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Employee </th>
-            <td mat-cell *matCellDef="let row"> 
-                <mat-checkbox [checked]="row.employee" (change)="checkemp($event,row.id)" ></mat-checkbox>
-            </td>
-          </ng-container> 
-
+          
           <ng-container matColumnDef="checkbox2">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> SuperAdmin </th>
             <td mat-cell *matCellDef="let row"> 
-                <mat-checkbox [checked]="row.superadmin" (change)="checksuperadmin($event,row.id)"[disabled]=" row.admin ===true && row.employee===true ? false:true" ></mat-checkbox>
+                <mat-checkbox [checked]="row.superadmin" (change)="checksuperadmin($event,row.id)"[disabled]=" row.admin ===true && row.user===true ? false:true" ></mat-checkbox>
             </td>
           </ng-container> 
           

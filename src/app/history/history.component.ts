@@ -5,8 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { EntrydetailComponent } from '../entrydetail/entrydetail.component';
-import { ReturndetailComponent } from '../returndetail/returndetail.component';
+
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -20,16 +19,37 @@ export class HistoryComponent implements OnInit {
   @ViewChild(MatSort) sort!:MatSort;
 
   displayedColumns:string[] =['harddiskno','harddiskname','name','purpose','entrydate','returndate']; //'entry','returndate','edit','view','delete',
-  dataSource:any;
+  dataSource = new MatTableDataSource();
   harddisklist:any;
   returnhistorylist = []
   username
   useruid
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
+  
+
+      applyFilter(event: Event) 
+      {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+      }
+    
+      update(event)
+      {
+        console.log(event.target.value);
+        var date = new Date(event.target.value);
+        var start = new Date(date.setHours(0, 0, 0))
+        var end = new Date (date.setHours(23,59,59))
+        console.log(new Date(event.target.value));
+        this.dataSource.data=this.returnhistorylist.filter((item:any) =>
+          {
+            return item.returndate.toDate().getTime() >= start.getTime() &&
+            item.returndate.toDate().getTime() <= end.getTime();
+          });
+      }
+    
+
+
+
   constructor(private dialog:MatDialog,private angularFirestore: AngularFirestore,
     private router:Router,private authservice : AuthService) {
     //   this.authservice.userdata.then( auth => {
@@ -40,40 +60,25 @@ export class HistoryComponent implements OnInit {
     // })
      }
 
-  ngOnInit(): void {
-    // this.authservice.getuid().then((x)=>{
-    //   console.log(x);
-    //   this.useruid=x
-      
-    //   this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.useruid)).get().toPromise().then( snap => {
-    //     console.log(snap);
-    //       snap.forEach(doc => {
-    //         console.log(doc.data()); //we need to check
-    //         this.username = doc.data()
-    //       });
+  ngOnInit(): void 
   
-    //       ////
-          
-           
-          
-    // })
-    // })
+  {
 
     this.angularFirestore.collection("return-history",ref => ref.orderBy("returndate","desc")).get().toPromise().then(snap => {
       this.returnhistorylist = [] //empty array beacuse duplicate will not be come
       console.log(snap);
       
-      snap.forEach(doc => {
+      snap.forEach(doc => 
+        {
            console.log(doc.data());
            this.returnhistorylist.push(doc.data()) //we push doc.data() to returnhistorylist
-           
-      })
-
-      this.dataSource=new MatTableDataSource(this.returnhistorylist)
-    });
+        })
+      
+        this.dataSource=new MatTableDataSource(this.returnhistorylist)
+        this.dataSource.paginator =this.paginator;
+      
+        });
     
-
-
   }
 
 }

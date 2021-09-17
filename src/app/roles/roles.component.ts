@@ -18,7 +18,7 @@ export class RolesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = ['name','checkbox1','checkbox','checkbox2'];
+  displayedColumns: string[] = ['name','checkbox','checkbox1','checkbox2'];
   dataSource: any;
   user
   constructor(private authservice:AuthService,private dialog:MatDialog,private db:AngularFirestore,private router:Router) 
@@ -46,45 +46,45 @@ export class RolesComponent implements OnInit {
           })
 
   }
-  check(event:any,id)
-  {
+
+  checkuser(event:any,id){
     console.log(id);
     console.log(event.checked);
-
     if(event.checked==true)
     {
       this.db.collection("userRegister").doc(id).update({
+        user:true
+      });
+    }
+    if(event.checked==false)
+    {
+      this.db.collection("userRegister").doc(id).update({
+      user:false
+      });
+    }
+
+  }
+
+
+   check(event:any,id)
+    {
+     console.log(id);
+     console.log(event.checked);
+
+      if(event.checked==true)
+      {
+        this.db.collection("userRegister").doc(id).update({
         admin:true
-      });
-    }
-    if(event.checked==false)
-    {
-      this.db.collection("userRegister").doc(id).update({
+        });
+      }
+        if(event.checked==false)
+      {
+        this.db.collection("userRegister").doc(id).update({
         admin:false
-      });
-    }
+        });
+      }
     
-    
-  }
-
-  checkemp(event:any,id){
-    console.log(id);
-    console.log(event.checked);
-    if(event.checked==true)
-    {
-      this.db.collection("userRegister").doc(id).update({
-        employee:true
-      });
     }
-    if(event.checked==false)
-    {
-      this.db.collection("userRegister").doc(id).update({
-        employee:false
-      });
-    }
-
-  }
-    
 
     checksuperadmin(event:any,id)
     {
@@ -92,14 +92,14 @@ export class RolesComponent implements OnInit {
       console.log(event.checked);
       if(event.checked==true)
       {
-        this.db.collection("userRegister").doc(id).update({
+          this.db.collection("userRegister").doc(id).update({
           superadmin:true
-        });
+          });
       }
       if(event.checked==false)
       {
         this.db.collection("userRegister").doc(id).update({
-          superadmin:false
+        superadmin:false
         });
       }
     }

@@ -24,23 +24,50 @@ export class InventoryComponent implements OnInit {
   dataSource:any;
   harddisklist:any;
   returnhistorylist = []
-  username
-  useruid
+  username:any;
+  useruid:any;
 
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     }
+
+
+    entry(event)
+    {
+      console.log(event.target.value);
+      var date = new Date(event.target.value);
+      var start = new Date(date.setHours(0, 0, 0))
+      var end = new Date (date.setHours(23,59,59))
+      console.log(new Date(event.target.value));
+      this.dataSource.data=this.mergeddata.filter((item:any) =>
+        {
+          return item.entrydate.toDate().getTime() >= start.getTime() &&
+          item.entrydate.toDate().getTime() <= end.getTime();
+        });
+    }
+
+
+    // return(event)
+    // {
+    //   console.log(event.target.value);
+    //   var date = new Date(event.target.value);
+    //   var start = new Date(date.setHours(0, 0, 0))
+    //   var end = new Date (date.setHours(23,59,59))
+    //   console.log(new Date(event.target.value));
+    //   this.dataSource.data=this.returnhistorylist.filter((item:any) =>
+    //     {
+    //       return item.returndate.toDate().getTime() >= start.getTime() &&
+    //       item.returndate.toDate().getTime() <= end.getTime();
+    //     });
+    // }
+
+
   constructor(private dialog:MatDialog,private angularFirestore: AngularFirestore,
     private router:Router,private authservice : AuthService) {
      console.log(this.authservice.getuid());
-      
-    // this.authservice.userdata.then( auth => {
-    //   console.log(auth.uid);
-    //   this.useruid = auth.uid
-      
-    // })
+  
     this.authservice.getuid().then( (x)=>{
         console.log(x);
         this.useruid = x
@@ -63,10 +90,6 @@ export class InventoryComponent implements OnInit {
                    this.returnhistorylist.push(doc.data()) //we push doc.data() to returnhistorylist
                    
               })
-    
-            
-            
-            
             this.mergeddata = [...this.harddisklist,...this.returnhistorylist] //spread operator array irukura all object
             console.log(this.mergeddata)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
             

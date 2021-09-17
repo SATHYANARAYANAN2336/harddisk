@@ -1,15 +1,16 @@
-            
-
+      <div class="mainscreen" style="text-align: center;">
+      <div ><img src="https://www.antanoharini.com/wp-content/uploads/2020/07/AH-Logo-Black-Trans.png"></div>
+  <br>
         <mat-toolbar>
-          <span style="margin:auto; display:table;">
+          <span style="margin:auto; display:table;text-decoration: wavy;">
             Login
         </span>
         </mat-toolbar>
       
-      <mat-card>
+      
       <form autocomplete="off" class="loginform" [formGroup] = "loginform" (ngSubmit)="login(loginform.value)">
-        <br>
-        <p>
+         <br>
+         <p>
           <mat-form-field class="fullwidth" appearance="outline" style= "width: 14%">
             <mat-label>Email</mat-label>
             <input type="text" name="email" class="mail" formControlName="email" matInput placeholder="Enter Email ID " required/>
@@ -26,14 +27,15 @@
             <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
             [attr.aria-pressed]="hide">
             <mat-icon> {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        <mat-error *ngIf="loginform.controls['password'].hasError('required')">Password is required</mat-error>
-        <mat-error *ngIf="loginform.controls['password'].hasError('minlength')">Minimum 6 character required</mat-error>
+            </button>
+            <mat-error *ngIf="loginform.controls['password'].hasError('required')">Password is required</mat-error>
+            <mat-error *ngIf="loginform.controls['password'].hasError('minlength')">Minimum 6 character required</mat-error>
         
-      </mat-form-field>
-
-      </p>
-     
+          </mat-form-field>
+        </p>
+        <p>
+        <button class="button" mat-button><a href="#" style="color: black; height: auto;"  routerLink="/resetpassword">Forgot Password</a></button>
+        </p>
         <p>
         <button type="submit" class="button-row" mat-raised-button color="primary" [disabled]="!loginform.valid" >Login</button>
         </p>
@@ -45,4 +47,4 @@
 
       </form>
 
-  </mat-card>
+ 

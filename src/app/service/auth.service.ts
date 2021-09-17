@@ -92,6 +92,15 @@ export class AuthService implements CanActivate{
       // });
   }
 
+  resetPassword(email:string){
+    return this.afu.sendPasswordResetEmail(email).then(()=>{
+console.log('reset password link sent successfully');
+    }).catch(error => {
+      console.log(error.message)
+      throw error.message
+    });
+  }
+
    async signout()
   {
     let out = confirm('are you sure want to logout')

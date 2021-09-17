@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -46,6 +47,7 @@ import { HarddisklistComponent } from './harddisklist/harddisklist.component';
 import { HistoryComponent } from './history/history.component';
 import { HarddiskinuseComponent } from './harddiskinuse/harddiskinuse.component';
 import { RolesComponent } from './roles/roles.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { RolesComponent } from './roles/roles.component';
     HarddisklistComponent,
     HistoryComponent,
     HarddiskinuseComponent,
-    RolesComponent
+    RolesComponent,
+    ResetpasswordComponent
 
   ],
 
@@ -97,7 +100,7 @@ import { RolesComponent } from './roles/roles.component';
     
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

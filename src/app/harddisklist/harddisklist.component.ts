@@ -5,8 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { EntrydetailComponent } from '../entrydetail/entrydetail.component';
-import { ReturndetailComponent } from '../returndetail/returndetail.component';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -37,7 +35,7 @@ export class HarddisklistComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.angularFirestore.collection("Harddisk").valueChanges().subscribe(res=>
+    this.angularFirestore.collection("Harddisk",ref => ref.where("use","==",false)).valueChanges().subscribe(res=>
       {
         console.log(res);
         this.harddisklist=res;
@@ -57,13 +55,15 @@ export class HarddisklistComponent implements OnInit {
     if(event.checked==true)
     {
       this.angularFirestore.collection("Harddisk").doc(id).update({
-        block:true
+        block:true,
+        // use:false
       });
     }
     if(event.checked==false)
     {
       this.angularFirestore.collection("Harddisk").doc(id).update({
-        block:false
+        block:false,
+        // use:true
       });
     }
     

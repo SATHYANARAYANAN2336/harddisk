@@ -81,6 +81,7 @@ export class RegisterComponent implements OnInit {
       name:value.name,
       number:value.number,
       email:value.email,
+      user:true
     })
     .then(() => {
       console.log("successfully submitted");

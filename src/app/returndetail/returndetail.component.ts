@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../service/auth.service';
 import firebase from 'firebase';
 import { MatDialogRef ,MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-returndetail',
@@ -38,12 +38,13 @@ export class ReturndetailComponent implements OnInit {
     private authservice:AuthService,
     public firestore:AngularFirestore,
     public router:Router,
-    public formbuilder: FormBuilder
+    public formbuilder: FormBuilder,
+    public pipe:DatePipe
   ) {
     this.authservice.userdata.then( auth => {
       console.log(auth.uid);
       this.useruid = auth.uid;
-///
+    ///
       this.firestore.collection("userRegister", ref=> ref.where("uid","==",this.authservice.uid)).valueChanges().subscribe(require =>{
         console.log(require);
   
@@ -62,10 +63,10 @@ export class ReturndetailComponent implements OnInit {
 
   ngOnInit(): void {
     
-
-    let d = new Date().toISOString().slice(0,10)
-   this.harddiskform.patchValue({
-   returndate:d
+    
+    let d = this.pipe.transform(new Date(), "yyyy-MM-ddThh:mm")
+    this.harddiskform.patchValue({
+    returndate:d
  })
    this.harddiskform.get('returndate').disable()
 
@@ -75,7 +76,10 @@ export class ReturndetailComponent implements OnInit {
     this.record=doc.data()
     console.log(doc.data())
     });
-  }
+  }  
+
+
+  
   returndetail(value:any){
     console.log(value);
     console.log(this.record)
@@ -101,9 +105,9 @@ export class ReturndetailComponent implements OnInit {
        entrydate:null,
        returndate:null,
        uid:null,
-       block:false,
+       use:false,
       //  availability:true,
-      //  use:true,
+      
       })
     }).catch(error => {
       console.error("Error",error);
