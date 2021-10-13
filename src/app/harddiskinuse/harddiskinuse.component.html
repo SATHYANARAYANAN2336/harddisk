@@ -1,10 +1,11 @@
-<div class="header" style="font-weight: 1000;" >
+<div style="height: 100vh;">
+  <div class="header" style="font-weight: 1000;" >
     <mat-toolbar>
-     <span style="margin:auto; display:table;">
-      HARDDISK IN USE</span>
+      <span style="margin:auto; display:table;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">HARDDISK IN USE</span>
     </mat-toolbar>
   </div>
-<mat-form-field appearance="standard">
+  
+  <mat-form-field appearance="standard">
     <mat-label>FilterBy</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Enter Person Name" #input>
   </mat-form-field>
@@ -14,8 +15,8 @@
     <mat-label> Date Filter</mat-label>
     <input matInput type="date" (change)="update($event)">
   </mat-form-field>
-  
-  <div class="mat-elevation-z8">
+
+  <div class="table mat-elevation-z8">
     <table mat-table  [dataSource]="dataSource" matSort>  
 
         <ng-container matColumnDef="harddiskname">
@@ -40,11 +41,6 @@
           <td mat-cell *matCellDef="let row"> {{row.entrydate.toDate() | date: 'medium'}} </td>
         </ng-container>
 
-
-
-
-
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     
@@ -53,5 +49,6 @@
         </tr>
     </table>
     
-      <mat-paginator [pageSizeOptions]="[10,20]"></mat-paginator>
-</div>      
+        <mat-paginator [pageSizeOptions]="[10,50,100,150,200,250,300]"></mat-paginator>
+  </div>      
+</div>

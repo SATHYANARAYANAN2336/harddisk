@@ -1,5 +1,4 @@
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
-import { RolesComponent } from './roles/roles.component';
 import { HistoryComponent } from './history/history.component';
 import { HarddisklistComponent } from './harddisklist/harddisklist.component';
 import { AuthService } from './service/auth.service';
@@ -17,6 +16,8 @@ import { ViewharddiskdetailComponent } from './viewharddiskdetail/viewharddiskde
 import { ReturndetailComponent } from './returndetail/returndetail.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { HarddiskinuseComponent } from './harddiskinuse/harddiskinuse.component';
+import { RoleComponent } from './role/role.component';
+import { RolesComponent } from './roles/roles.component';
 const routes: Routes = [
   { path: '',redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -32,14 +33,15 @@ const routes: Routes = [
     { path: 'harddisk',component:HarddiskdetailComponent,canActivate:[AuthService]},
     {path:'entrydetail/:id', component:EntrydetailComponent,canActivate:[AuthService]},
     {path:'returndetail/:id', component:ReturndetailComponent,canActivate:[AuthService]},
+    { path:'editharddiskdetail/:id', component:EditharddiskdetailComponent,canActivate:[AuthService]},
   ]},
   
-  { path:'editharddiskdetail/:id', component:EditharddiskdetailComponent},
+  
   { path:'viewharddiskdetail/:id', component:ViewharddiskdetailComponent},
   
   { path: 'login', component: LoginComponent },
   { path:'sidenav', component:SidenavComponent,canActivate:[AuthService] },
-  { path: 'roles', component: RolesComponent },
+  { path: 'role', component: RolesComponent },
 ];
 
 @NgModule({

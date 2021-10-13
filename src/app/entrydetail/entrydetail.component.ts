@@ -20,12 +20,6 @@ export class EntrydetailComponent implements OnInit {
   harddiskid="";
   userdetail:any;
   useruid:any;
-  
-  // minDate = new Date().toISOString().slice(0, 16);
-  // maxDate = new Date().toISOString().slice(0, 16) ;
-  // maxDate:Date;
-
-
   harddiskform:FormGroup;//kar
   
   constructor(
@@ -36,53 +30,28 @@ export class EntrydetailComponent implements OnInit {
     private firestore:AngularFirestore,
     private formbuilder:FormBuilder,
     public pipe:DatePipe
-  ){
-   
-  
-    // console.log(new Date(this.minDate));
-    // console.log(firebase.firestore.Timestamp.fromDate(new Date(this.minDate)));
-    // let d = firebase.firestore.Timestamp.fromDate(new Date())
-    // console.log(d.toDate());
-   
-    
-    
-    
+  )
+  {
     this.harddiskform=this.formbuilder.group({
       purpose:["",{validators:[Validators.required],updateOn:"change"}],
       entrydate:["",{validators:[Validators.required,Validators.max],updateOn:"change"}]
     });
 
-    
-
-    
-
-    this.firestore.collection("userRegister", ref=>ref.where("uid", "==", this.authservice.uid)).valueChanges().subscribe( require => {
+    this.firestore.collection("userRegister", ref=>ref.where("uid", "==", this.authservice.uid)).valueChanges().subscribe( require => { 
         console.log(require);
-        
-          require.forEach(doc => {
-          this.userdetail=doc
-    
-          console.log(this.userdetail);
-
-    }) 
-    
-        
-      
-    })
-
-    // console.log(this.authservice.authState.uid);
-    
-  
-   
+        require.forEach(doc => {
+        this.userdetail=doc
+        console.log(this.userdetail);
+        }) 
+      })
   }
 
   ngOnInit():void{
    console.log("ID :",this.data.id);
-    
    this.harddiskid=this.data.id;
    let d = this.pipe.transform(new Date(), "yyyy-MM-ddThh:mm")
    this.harddiskform.patchValue({
-   entrydate:d
+    entrydate:d
    })
    this.harddiskform.get('entrydate').disable()
    }
@@ -95,8 +64,6 @@ export class EntrydetailComponent implements OnInit {
       entrydate:new Date(),
       uid:this.userdetail.uid,
       use:true,
-      // availability:false,
-      
     }).then(()=>{
       alert("Harddisk update");
       console.log("Success")
@@ -106,11 +73,10 @@ export class EntrydetailComponent implements OnInit {
       alert("error")
     });
     this.router.navigateByUrl("/adm/dashboard");
-    
   }
+  
   cancel(){
     this.dialogref.close();
   }
-      //new Date(this.date)
  }
 

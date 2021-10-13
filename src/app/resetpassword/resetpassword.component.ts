@@ -10,15 +10,18 @@ import { Router } from '@angular/router'
 export class ResetpasswordComponent implements OnInit {
 
 email="";  
-
   constructor(private authservice:AuthService, private router:Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  resetPassword(email:string){
+  resetPassword(email:string)
+  {
       this.authservice.resetPassword(this.email)
-      .then(() => this.router.navigateByUrl('/login'))
+      .then(() =>{ 
+      alert("Please Check your email");
+      this.router.navigateByUrl('/login')
+      })
+      
   }
 
 }

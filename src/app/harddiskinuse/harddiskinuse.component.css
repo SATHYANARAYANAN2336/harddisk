@@ -1,17 +1,6 @@
 table {
   width: 100%;
 }
-.mat-form-field {
-  font-size: 14px;
-  width: 20%;
-}
-
-td, th {
-  width: 200px;
-}
-.button{
-  float: right;
-}
 .mat-toolbar {
     background: #89b1ee85;
     color: rgba(0,0,0,.87);

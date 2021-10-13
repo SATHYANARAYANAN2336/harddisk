@@ -16,7 +16,6 @@ export class RegisterComponent implements OnInit {
   hide: boolean = true;
   error= '';
   message='';
-  
 
   registerform: FormGroup = this.formbuilder.group({
     name: [, { validators: [Validators.required], updateOn: "change" }],
@@ -26,26 +25,23 @@ export class RegisterComponent implements OnInit {
     confirmpassword: [, { validators: [Validators.required, Validators.minLength(6)], updateOn: "change" }],
   });
 
-  // floatLabelControl = new FormControl('auto');
-
   constructor(
     db:AngularFirestore,
     public firestore: AngularFirestore,
     private authservice: AuthService,
     public router: Router,
-    public formbuilder: FormBuilder) {
+    public formbuilder: FormBuilder) 
+    {
       this.db=db;
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
-  register(value:any) {
-    if(this.registerform.valid){
-      
-    
-    console.log("this document created",value);
-       this.authservice.registerWithEmail(value.email, value.password)
+    register(value:any) {
+      if(this.registerform.valid)
+      {
+        console.log("this document created",value);
+          this.authservice.registerWithEmail(value.email, value.password)
           .then((v) => {
             console.log(v.user.uid);
             // if(this.registerform.valid){
@@ -59,40 +55,41 @@ export class RegisterComponent implements OnInit {
             this.error = _error
             this.router.navigate(['/register'])
           })
-        }
-  }
+      }
+    }
 
-
-  checkpassword(){
-    if(this.registerform.controls.password.value == this.registerform.controls.confirmpassword.value){
+  checkpassword()
+    {
+      if(this.registerform.controls.password.value == this.registerform.controls.confirmpassword.value){
       this.registerform.controls.confirmpassword.setErrors(null)
     }
-    else{
+    else
+    {
       this.registerform.controls.confirmpassword.setErrors({error : true})
     }
   }
 
-  onSubmit(value:any,uid){
-    console.log(value);
-    const registerId = this.db.createId();
-    this.db.doc('/userRegister/'+registerId).set({
+  onSubmit(value:any,uid)
+    {
+      console.log(value);
+      const registerId = this.db.createId();
+      this.db.doc('/userRegister/'+registerId).set({
       id:registerId,
       uid:uid,
       name:value.name,
       number:value.number,
       email:value.email,
       user:true
-    })
-    .then(() => {
+      })
+      .then(() => {
+      alert("Successfully Registered");  
       console.log("successfully submitted");
       this.router.navigate(['/login']);
-    })
-    .catch(error => {
+      })
+      .catch(error => {
       console.error("Document Writing Error:",error);
-    });
+      });
     }
-
-    
 
 }
 

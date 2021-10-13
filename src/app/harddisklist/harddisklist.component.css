@@ -6,13 +6,23 @@ table {
   width: 20%;
 }
 
-td, th {
-  width: 200px;
-}
 .button{
   float: right;
 }
 .mat-toolbar {
     background: #89b1ee85;
     color: rgba(0,0,0,.87);
+}
+
+.row{
+  width:200px;
+  
+}
+
+
+.row1{
+  width:200px;
+  text-align:justify;
+  padding-right:30px;
+   padding-left:30px;
 }

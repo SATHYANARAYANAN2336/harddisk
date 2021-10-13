@@ -1,38 +1,9 @@
-<!-- <ng-container matColumnDef="add">
-  <th mat-header-cell *matHeaderCellDef > Edit </th>
-  <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button"(click)=onrowedit(row.id) >Add</button> </td>
-</ng-container> -->
 
-
-    
-
-
-<!-- <mat-toolbar color="primary"> We use mat toolbar above the mat-drawer-container thren only it show in proper way...
-  <button mat-icon-button class="example-icon" (click)="opened=!opened" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  
-  
-  <span style="flex: 1 1 auto"></span>
-  <span>HARD-DISK DASHBOARD</span>
-
-  <span  style="flex: 1 1 auto"></span>
-  
-  <button mat-icon-button (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
-  
-</mat-toolbar> -->
-
- <!-- <mat-sidenav-container class="container">
-  <mat-sidenav mode="side" [(opened)]="opened">
-   Available Harddisk List
-  </mat-sidenav> -->
 
   <div class="header" style="font-weight: 1000;" >
     <mat-toolbar>
-     <span style="margin:auto; display:table;">
-      AVAILABLE HARDDISKLIST</span>
+      <span style="margin:auto; display:table;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+      AVAILABLE HARDDISK</span>
     </mat-toolbar>
   </div>
 
@@ -44,22 +15,31 @@
 
 <div class="mat-elevation-z8">
   <table mat-table  [dataSource]="dataSource" matSort>
-
-
-    <ng-container matColumnDef="harddiskname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Harddiskname </th>
-      <td mat-cell  *matCellDef="let row"> {{row.harddiskname}} </td>
+    
+    <ng-container matColumnDef="harddiskno">
+      <th mat-header-cell class="row" *matHeaderCellDef mat-sort-header> Harddiskno </th>
+      <td mat-cell class="row1" *matCellDef="let row"> {{row.harddiskno}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="harddiskno">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Harddiskno </th>
-      <td mat-cell *matCellDef="let row"> {{row.harddiskno}} </td>
+    <ng-container matColumnDef="harddiskname">
+      <th mat-header-cell class="row" *matHeaderCellDef mat-sort-header> Harddiskname </th>
+      <td mat-cell class="row1"  *matCellDef="let row"> {{row.harddiskname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="harddiskinfo">
+      <th mat-header-cell class="row " *matHeaderCellDef mat-sort-header> HarddiskInfo </th>
+      <td mat-cell class="row1" *matCellDef="let row"> <label>{{row.harddiskinfo}}</label> </td>      <!-- Check on style css -->
     </ng-container>
 
     <ng-container matColumnDef="entry">
-      <th mat-header-cell *matHeaderCellDef > Entry </th>
-      <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button"(click)=onrowentry(row.id) >Entry</button> </td>
+      <th mat-header-cell class="row" *matHeaderCellDef > Entry </th>
+      <td mat-cell class="row1" *matCellDef="let row"> <button mat-raised-button color="primary" type="button"(click)=onrowentry(row.id) >Entry</button> </td>
     </ng-container>
+
+    <!-- <ng-container matColumnDef="edit">
+      <th mat-header-cell class="row" *matHeaderCellDef > Edit </th>
+      <td mat-cell class="row1" *matCellDef="let row"> <button mat-mini-fab color="primary" type="button" (click)=onrowedit(row.id) ><mat-icon>edit_note</mat-icon></button> </td>
+    </ng-container> -->
 
     
 
@@ -71,7 +51,11 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[10,20]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10,50,100,150,200,250,300]"></mat-paginator>
 </div>
+<br>
+<br>
+<br>
+<br>
 
 

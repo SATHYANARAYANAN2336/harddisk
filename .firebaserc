@@ -1,5 +1,15 @@
 {
   "projects": {
-    "default": "harddisk-2b5fb"
+    "default": "harddisk-2b5fb",
+    "production": "harddisk-2b5fb"
+  },
+  "targets": {
+    "harddisk-2b5fb": {
+      "hosting": {
+        "production": [
+          "harddisk-2b5fb"
+        ]
+      }
+    }
   }
 }

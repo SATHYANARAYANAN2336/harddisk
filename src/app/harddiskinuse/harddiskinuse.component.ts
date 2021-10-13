@@ -24,9 +24,7 @@ export class HarddiskinuseComponent implements OnInit {
   returnhistorylist = []
   username
 
-  
-
-  applyFilter(event: Event) {
+    applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     }
@@ -46,7 +44,6 @@ export class HarddiskinuseComponent implements OnInit {
     }
 
   constructor(
-    
     private angularFirestore:AngularFirestore,
     private router:Router,
     public authservice:AuthService,
@@ -58,10 +55,19 @@ export class HarddiskinuseComponent implements OnInit {
       this.userid =auth.uid
     });
 
+    this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.authservice.uid)).get().toPromise().then( snap => {
+      console.log(snap);
+        snap.forEach(doc => {
+            this.userdata=doc 
+            console.log(this.userdata);
+            if(!doc.data()['admin'] && !doc.data()['superadmin'] ){
+              this.router.navigateByUrl("/adm/dashboard")
+            }           
+        })
+      })
 
-    this.angularFirestore.collection("Harddisk",ref => ref.where("use","==",true)).valueChanges().subscribe(res=>
+    this.angularFirestore.collection("Harddisk",ref => ref.where("use","==",true).orderBy("harddiskno","asc")).valueChanges().subscribe(res=>
       {
-        // this.harddisklist=[ ]
        console.log(res);
        this.harddisklist=res;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ;
        
@@ -74,5 +80,4 @@ export class HarddiskinuseComponent implements OnInit {
    }
 
   ngOnInit(): void {}
-
 }

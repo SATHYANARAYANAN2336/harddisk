@@ -16,10 +16,10 @@ export class SidenavComponent implements OnInit {
     constructor(private authservice:AuthService,private router:Router,private afs:AngularFirestore  )
     {
       console.log(this.authservice.uid)
-      this.afs.collection("userRegister",ref => ref.where("uid","==",this.authservice.uid)).get().toPromise().then(snap =>
+      this.afs.collection("userRegister",ref => ref.where("uid","==",this.authservice.uid)).snapshotChanges().subscribe(snap =>
         {
           snap.forEach(doc =>{
-            this.userdata=doc.data();
+            this.userdata=doc.payload.doc.data();
             console.log(this.userdata);
             
           })

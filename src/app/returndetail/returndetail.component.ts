@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../service/auth.service';
-import firebase from 'firebase';
 import { MatDialogRef ,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 
@@ -24,13 +23,8 @@ export class ReturndetailComponent implements OnInit {
    useruid
 
    harddiskform: FormGroup = this.formbuilder.group({
-    
     returndate:["",{validators:[Validators.required],updateOn:"change"}],
-
    });  
-  
-
-
   constructor(
     @Inject(MAT_DIALOG_DATA)public data: any, // here we call from dashboard component
     public dialogref:MatDialogRef<ReturndetailComponent>, //fordialog open and close we use dialogRef
@@ -40,36 +34,24 @@ export class ReturndetailComponent implements OnInit {
     public router:Router,
     public formbuilder: FormBuilder,
     public pipe:DatePipe
-  ) {
-    this.authservice.userdata.then( auth => {
-      console.log(auth.uid);
-      this.useruid = auth.uid;
-    ///
+    ) {
       this.firestore.collection("userRegister", ref=> ref.where("uid","==",this.authservice.uid)).valueChanges().subscribe(require =>{
         console.log(require);
-  
+          
         require.forEach(doc =>{
           this.userdetail=doc
           console.log(this.userdetail);
           })
       })
-      ///
-    });
-    // console.log(this.authservice.authState.uid);
-   
-  
-  
   }
 
-  ngOnInit(): void {
-    
-    
+  ngOnInit(): void 
+  {
     let d = this.pipe.transform(new Date(), "yyyy-MM-ddThh:mm")
     this.harddiskform.patchValue({
     returndate:d
- })
-   this.harddiskform.get('returndate').disable()
-
+    })
+    this.harddiskform.get('returndate').disable()
     console.log(this.data.id); // here we call from dashboard component entry button we pass data and id and we fetch that data and id here
     this.harddiskid=this.data.id; 
     this.firestore.collection("Harddisk").doc(this.harddiskid).get().toPromise().then((doc) => { // we set name called result
@@ -77,13 +59,11 @@ export class ReturndetailComponent implements OnInit {
     console.log(doc.data())
     });
   }  
-
-
   
-  returndetail(value:any){
+  returndetail(value:any)
+  {
     console.log(value);
     console.log(this.record)
-    
     let docid1=this.firestore.createId();
     this.firestore.collection('return-history').doc(docid1).set({
       id:docid1,
@@ -95,8 +75,6 @@ export class ReturndetailComponent implements OnInit {
       purpose:this.record.purpose,
       entrydate:this.record.entrydate.toDate(),
       returndate:new Date(), //new value
-      // block:this.record.block
-      
     }).then(() =>{
       this.dialogref.close(DashboardComponent)
       this.firestore.collection("/Harddisk").doc(this.harddiskid).update({
@@ -106,21 +84,16 @@ export class ReturndetailComponent implements OnInit {
        returndate:null,
        uid:null,
        use:false,
-      //  availability:true,
-      
       })
     }).catch(error => {
       console.error("Error",error);
     });
     alert("Harddisk data updated");
-    // this.router.navigateByUrl("/adm/dashboard");
-
   }
 
-
-  cancel(){
-    this.dialogref.close(); //see 37 line   
-
-  }
+  cancel()
+    {
+      this.dialogref.close(); //see 37 line   
+    }
 
 }

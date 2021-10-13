@@ -9,11 +9,11 @@ import { AuthService } from '../service/auth.service';
 
 
 @Component({
-  selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.css']
+  selector: 'app-role',
+  templateUrl: './role.component.html',
+  styleUrls: ['./role.component.css']
 })
-export class RolesComponent implements OnInit {
+export class RoleComponent implements OnInit {
   [x: string]: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,7 +39,8 @@ export class RolesComponent implements OnInit {
       });
   }
 
-  checkuser(event:any,id){
+  checkuser(event:any,id)
+  {
     console.log(id);
     console.log(event.checked);
     if(event.checked==true)
@@ -58,7 +59,7 @@ export class RolesComponent implements OnInit {
   }
 
 
-   check(event:any,id)
+  check(event:any,id)
     {
      console.log(id);
      console.log(event.checked);
@@ -71,7 +72,7 @@ export class RolesComponent implements OnInit {
     
     }
 
-    checksuperadmin(event:any,id)
+  checksuperadmin(event:any,id)
     {
       console.log(id);
       console.log(event.checked);

@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -24,8 +23,6 @@ export class HistoryComponent implements OnInit {
   returnhistorylist = []
   username
   useruid
-
-  
 
       applyFilter(event: Event) 
       {
@@ -46,39 +43,36 @@ export class HistoryComponent implements OnInit {
             item.returndate.toDate().getTime() <= end.getTime();
           });
       }
-    
-
-
 
   constructor(private dialog:MatDialog,private angularFirestore: AngularFirestore,
     private router:Router,private authservice : AuthService) {
-    //   this.authservice.userdata.then( auth => {
-    //   console.log(auth.uid);
-    //   this.useruid = auth.uid
-      
-      
-    // })
-     }
-
-  ngOnInit(): void 
-  
-  {
-
+      this.authservice.userdata.then( auth => {
+      console.log(auth.uid);
+      this.useruid = auth.uid
+    });
+    this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.authservice.uid)).get().toPromise().then(snap => {
+      console.log(snap);
+        snap.forEach(doc => {
+            this.userdata=doc 
+            console.log(this.userdata);
+            
+            if(!doc.data()['admin'] && !doc.data()['superadmin'] ){
+              this.router.navigateByUrl("/adm/dashboard")
+            }           
+        })
+      })
     this.angularFirestore.collection("return-history",ref => ref.orderBy("returndate","desc")).get().toPromise().then(snap => {
       this.returnhistorylist = [] //empty array beacuse duplicate will not be come
       console.log(snap);
-      
       snap.forEach(doc => 
         {
            console.log(doc.data());
            this.returnhistorylist.push(doc.data()) //we push doc.data() to returnhistorylist
         })
-      
         this.dataSource=new MatTableDataSource(this.returnhistorylist)
         this.dataSource.paginator =this.paginator;
-      
         });
-    
-  }
+     }
 
+  ngOnInit(): void { }
 }

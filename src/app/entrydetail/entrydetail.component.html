@@ -1,45 +1,40 @@
 
-    <mat-card-content>
+  <mat-card-content>
       <div class="header" style="font-weight: 1000;">
         <mat-toolbar>
-         <span style="margin:auto; display:table;">
+          <span style="margin:auto; display:table;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
          Entry Harddisk Detail</span>
         </mat-toolbar>
       </div>
       <br>
-      <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" (ngSubmit)="entrydetail(harddiskform.value)">
+    <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" (ngSubmit)="entrydetail(harddiskform.value)">
 
-<p>
+      <p>
           <mat-form-field appearance="fill" class="number"  >
             <mat-label>Purpose</mat-label>
             <input matInput type="text" formControlName="purpose" placeholder="Please Enter purpose "required/>
             <mat-error *ngIf="!harddiskform.controls['purpose'].valid">Purpose is required </mat-error>
           </mat-form-field>
-</p>
+      </p>
 
-<p>
-    <mat-form-field appearance="fill" class="number"  > 
-      <mat-label>Entry On</mat-label> 
-      <input matInput type="datetime-local" formControlName="entrydate" required/>
-       <mat-error *ngIf="!harddiskform.controls['entrydate'].valid">Entry date is required </mat-error>
-     </mat-form-field> 
-</p>
+      <p>
+          <mat-form-field appearance="fill" class="number"  > 
+            <mat-label>Entry On</mat-label> 
+            <input matInput type="datetime-local" formControlName="entrydate" required/>
+            <mat-error *ngIf="!harddiskform.controls['entrydate'].valid">Entry date is required </mat-error>
+          </mat-form-field> 
+      </p>
 
-
-
-
-
-    <div class="button" style="margin-left: 3%;margin-top:-1%;">
+      <div class="button" style="margin-left: 3%;margin-top:-1%;">
         <button type="button" class="button-row" mat-raised-button color="primary" (click)=cancel()>Cancel</button>
-    </div>
+      </div>
 
-
-    <div class="button" style="margin-left:56%;margin-top:-15%;">
+      <div class="button" style="margin-left:56%;margin-top:-15%;">
         <button type="submit" class="button-row" mat-raised-button disabled color="primary" [disabled]="!harddiskform.valid">Submit</button>
-    </div>
+      </div>
 
-      </form>
-    </mat-card-content>
+    </form>
+  </mat-card-content>
 
 
 

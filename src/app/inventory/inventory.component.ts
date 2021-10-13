@@ -48,22 +48,6 @@ export class InventoryComponent implements OnInit {
         });
     }
 
-
-    // return(event)
-    // {
-    //   console.log(event.target.value);
-    //   var date = new Date(event.target.value);
-    //   var start = new Date(date.setHours(0, 0, 0))
-    //   var end = new Date (date.setHours(23,59,59))
-    //   console.log(new Date(event.target.value));
-    //   this.dataSource.data=this.returnhistorylist.filter((item:any) =>
-    //     {
-    //       return item.returndate.toDate().getTime() >= start.getTime() &&
-    //       item.returndate.toDate().getTime() <= end.getTime();
-    //     });
-    // }
-
-
   constructor(private dialog:MatDialog,private angularFirestore: AngularFirestore,
     private router:Router,private authservice : AuthService) {
      console.log(this.authservice.getuid());
@@ -71,7 +55,7 @@ export class InventoryComponent implements OnInit {
     this.authservice.getuid().then( (x)=>{
         console.log(x);
         this.useruid = x
-        this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.authservice.uid)).get().toPromise().then( snap => {
+        this.angularFirestore.collection("userRegister",ref => ref.where("uid","==",this.useruid)).get().toPromise().then( snap => {
           console.log(snap);
             snap.forEach(doc => {
               console.log(doc.data()['name']); //we need to check
@@ -83,13 +67,13 @@ export class InventoryComponent implements OnInit {
            {
             console.log(res);
             this.harddisklist=res;
-            await this.angularFirestore.collection("return-history",ref=>ref.where("uid","==",this.authservice.uid)).get().toPromise().then(snap => {
-              this.returnhistorylist = [] //empty array beacuse duplicate will not be come
-              snap.forEach(doc => {
+            await this.angularFirestore.collection("return-history",ref=>ref.where("uid","==",this.useruid)).get().toPromise().then(snap => {
+            this.returnhistorylist = [] //empty array because duplicate will not be come
+              snap.forEach(doc => 
+                {
                    console.log(doc.data());
                    this.returnhistorylist.push(doc.data()) //we push doc.data() to returnhistorylist
-                   
-              })
+                })
             this.mergeddata = [...this.harddisklist,...this.returnhistorylist] //spread operator array irukura all object
             console.log(this.mergeddata)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
             
@@ -110,26 +94,16 @@ export class InventoryComponent implements OnInit {
     }
 
 
-  ngOnInit(): void {
-   
+    ngOnInit(): void {}
     
-    
-    
-      
-   
-    
-    
-
-   
-    }
-    
-    onrowadd(id:any){
+    onrowadd(id:any)
+    {
       console.log(id);
       this.router.navigateByUrl(`/harddisk`)
-      
     }
 
-    onrowentry(id:any){
+    onrowentry(id:any)
+    {
       console.log(id);
       // this.router.navigateByUrl(`/entrydetail/${id}`)
       this.dialog.open(EntrydetailComponent,{
@@ -168,8 +142,5 @@ export class InventoryComponent implements OnInit {
         this.angularFirestore.doc('Harddisk/' +id).delete();
       }
     }
-
-    
-
 
 }

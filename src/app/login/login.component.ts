@@ -31,14 +31,16 @@ export class LoginComponent implements OnInit {
     public auth: AngularFireAuth,
     public router: Router,
     public formbuilder: FormBuilder,
-    private authservice: AuthService) {
+    private authservice: AuthService) 
+    {
       this.db=db; 
-  }
+    }
 
   login(value:any) {
-    if(this.loginform.valid){
-    console.log("this document created");
-    this.authservice.loginWithEmail(value.email, value.password)
+    if(this.loginform.valid)
+    {
+      console.log("this document created");
+      this.authservice.loginWithEmail(value.email, value.password)
           .then((result) => {
             console.log(result.user.uid);
             // this.db.collection("userRegister",ref => ref.where("uid","==",result.user.uid)).
@@ -47,17 +49,17 @@ export class LoginComponent implements OnInit {
             //     console.log(data);
                 
             //   })
+            // alert("Successfully logged in")
             console.log("successfulley Submitted");
             this.router.navigate(['/adm/dashboard'])
           }).catch(error => {
-             alert(error.message)
+             alert("Check your Email Id and Password and make sure you have already register")
             console.error("Document Writing Error:",error.message);
           });
-        }
+    }
 
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
+import { AuthService } from './../service/auth.service';
+
 import {ActivatedRoute, Router} from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl,FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef ,MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-editharddiskdetail',
@@ -20,7 +23,8 @@ export class EditharddiskdetailComponent implements OnInit {
    harddiskform: FormGroup = this.formbuilder.group({
     harddiskno:["",{validators:[Validators.required],updateOn:"change"}],
     harddiskname:["",{validators:[Validators.required],updateOn:"change"}],
-    harddiskcontent:[,{validators:[Validators.required],updateOn:"change"}],
+    harddiskpassword:["",{validators:[],updateOn:"change"}],
+    harddiskinfo:["",{validators:[Validators.required],updateOn:"change"}],
     brandname:["",{validators:[Validators.required],updateOn:"change"}],
     brandcolor:["",{validators:[Validators.required],updateOn:"change"}],
     capacity:["",{validators:[Validators.required],updateOn:"change"}],
@@ -32,7 +36,10 @@ export class EditharddiskdetailComponent implements OnInit {
    
 
   constructor(
+    @Inject(MAT_DIALOG_DATA)public data: any,
+    public dialogref:MatDialogRef<EditharddiskdetailComponent>,
     db:AngularFirestore,
+    public authservice:AuthService,
     private fb: FormBuilder,
     public firestore:AngularFirestore,
     public router:Router,
@@ -45,7 +52,8 @@ export class EditharddiskdetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.route.snapshot.params.id); // route:router this for navigate,snapshot means it will show updated value,                                    // params means parameters we can give own name,id means it call from parameter
-    this.harddiskid=this.route.snapshot.params.id; 
+    this.harddiskid=this.data.id;
+
 
 
     this.db.collection("Harddisk").doc(this.harddiskid).get().toPromise().then((doc) => { // we set name called result
@@ -56,7 +64,8 @@ export class EditharddiskdetailComponent implements OnInit {
       this.harddiskform.patchValue({
         harddiskno:this.record.harddiskno,
         harddiskname:this.record.harddiskname,
-        harddiskcontent:this.record.harddiskcontent,
+        harddiskpassword:this.record.harddiskpassword,
+        harddiskinfo:this.record.harddiskinfo,
         brandname:this.record.brandname,
         brandcolor:this.record.brandcolor,
         capacity:this.record.capacity,
@@ -74,16 +83,19 @@ export class EditharddiskdetailComponent implements OnInit {
     this.db.collection("/Harddisk").doc(this.harddiskid).update(
       this.harddiskform.value
     ).then(() =>{
+      alert("Harddisk data updated");
+      this.dialogref.close();
     }).catch(error => {
-      console.error("Error",error);
+      console.error("error");
+      alert("error")
+
     });
-    alert("Harddisk data updated");
     this.router.navigateByUrl("/adm/dashboard");
+
   }
 
     cancel(){
-      this.router.navigateByUrl("/adm/dashboard")
-
+      this.dialogref.close();
     }
     
  }

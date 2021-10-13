@@ -1,40 +1,41 @@
-<mat-toolbar color="primary"> <!--We use mat toolbar above the mat-drawer-container thren only it show in proper way...-->
-
-
+<div style="height: 100%;">
+  <mat-toolbar color="primary"> <!--We use mat toolbar above the mat-drawer-container thren only it show in proper way...-->
     <button mat-icon-button class="example-icon" (click)="sidenav.toggle()" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+      <mat-icon>menu</mat-icon>
     </button>
-
+  
     <span style="flex: 1 1 auto"></span>
-  <span>HARD-DISK DASHBOARD</span>
-
-  <span  style="flex: 1 1 auto"></span>
-
-  <a>Welcome {{userdata['name']}}</a>
-  <button mat-icon-button (click)="logout()">
-  <mat-icon >logout</mat-icon>
-  </button>
-
-</mat-toolbar>
-
-<mat-drawer-container>
-    <mat-drawer color="primary" style="width: 200px;" mode="side" opened #sidenav>
-        <mat-nav-list>
-
-          <a  mat-list-item routerLink="/adm/dashboard"><mat-icon>arrow_right</mat-icon>Available HarddiskList </a>
-          <a  mat-list-item routerLink="/adm/inventory"><mat-icon>arrow_right</mat-icon>My Inventory </a>
-          <a *ngIf="userdata['admin']" mat-list-item routerLink="/adm/harddisk"><mat-icon>arrow_right</mat-icon>Add New Harddisk</a>
-          <a *ngIf="userdata['admin']" mat-list-item routerLink="/adm/harddisklist"><mat-icon>arrow_right</mat-icon>Harddisk List</a>
-          <a *ngIf="userdata['admin']" mat-list-item routerLink="/adm/harddiskinuse"><mat-icon>arrow_right</mat-icon>Harddisk in Use</a>
-          <a *ngIf="userdata['admin']" mat-list-item routerLink="/adm/history"><mat-icon>arrow_right</mat-icon>History</a>
-          <a mat-list-item (click)="logout()" mat-list-item><mat-icon>logout</mat-icon>Logout {{userdata['name']}}</a> <!--we use map function here we call name field-->
+    <span style="margin:auto; display:table;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+      HARD-DISK DASHBOARD</span>
+    <span  style="flex: 1 1 auto"></span>
+    <a style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Welcome {{userdata['name']}}</a>
+    <button mat-icon-button (click)="logout()">
+    <mat-icon >logout</mat-icon>
+    </button>
+  
+  </mat-toolbar>
+  
+  <mat-sidenav-container >
+      <mat-sidenav color="primary" style="width: 200px;" mode="side" opened #sidenav>
+          <mat-nav-list>
+  
+            <a style="font-family:Arial, Helvetica, sans-serif;" mat-list-item routerLink="/adm/dashboard"><mat-icon>arrow_right</mat-icon><b>Available Harddisk</b> </a>
+            <a style="font-family:Arial, Helvetica, sans-serif;" mat-list-item routerLink="/adm/inventory"><mat-icon>arrow_right</mat-icon><b>My Inventory</b> </a>
+            <a style="font-family:Arial, Helvetica, sans-serif;" *ngIf="userdata['admin'] || userdata['superadmin']" mat-list-item routerLink="/adm/harddisk"><mat-icon>arrow_right</mat-icon><b>Add New Harddisk</b></a>
+            <a style="font-family:Arial, Helvetica, sans-serif;" *ngIf="userdata['admin'] || userdata['superadmin']" mat-list-item routerLink="/adm/harddisklist"><mat-icon>arrow_right</mat-icon><b>Harddisk Database</b></a>
+            <a style="font-family:Arial, Helvetica, sans-serif;" *ngIf="userdata['admin'] || userdata['superadmin']" mat-list-item routerLink="/adm/harddiskinuse"><mat-icon>arrow_right</mat-icon><b>Harddisk in Use</b></a>
+            <a style="font-family:Arial, Helvetica, sans-serif;" *ngIf="userdata['admin'] || userdata['superadmin']" mat-list-item routerLink="/adm/history"><mat-icon>arrow_right</mat-icon><b>History</b></a>
+            <a style="font-family:Arial, Helvetica, sans-serif;" mat-list-item (click)="logout()" mat-list-item><mat-icon>logout</mat-icon><b>Logout {{userdata['name']}}</b></a> <!--we use map function here we call name field-->
         
-      
-        </mat-nav-list>
-        </mat-drawer>
-        
-        <div style="height: 100vh;">
-         <router-outlet></router-outlet> 
-       </div>
-   </mat-drawer-container>
-   
+          </mat-nav-list>
+      </mat-sidenav>
+          
+        <mat-sidenav-content>
+              <div style="height: 100vh;">
+           <router-outlet></router-outlet> 
+          </div>
+        </mat-sidenav-content>
+  
+     </mat-sidenav-container>
+     
+</div>

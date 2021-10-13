@@ -1,17 +1,14 @@
-<mat-card>
-    <mat-card-content>
+
       <div class="header"style="font-weight: 1000;">
         <mat-toolbar>
-          <span style="margin:auto; display:table;">
+          <span style="margin:auto; display:table;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
             Edit Harddisk Detail</span>
-         
-
         </mat-toolbar>
       </div>
       <br>
       <form autocomplete="off" class="harddiskform" [formGroup] = "harddiskform" (ngSubmit)="editharddisk(harddiskform.value)">
 <p>
-          <mat-form-field appearance="fill" class="username" >
+          <mat-form-field appearance="fill" >
             <mat-label>Hard Disk No</mat-label>
             <input matInput type="text" name="name" formControlName="harddiskno" placeholder="please Enter Hard disk No"required/>
             <mat-error *ngIf="!harddiskform.controls['harddiskno'].valid">Hard Disk No is required </mat-error>
@@ -19,7 +16,7 @@
 </p>
 
 <p>
-    <mat-form-field appearance="fill" class="username" >
+    <mat-form-field appearance="fill" >
       <mat-label>Hard Disk Name</mat-label>
       <input matInput type="text" name="name" formControlName="harddiskname" placeholder="please Enter Hard disk Name"required/>
       <mat-error *ngIf="!harddiskform.controls['harddiskname'].valid">Hard Disk Name is required </mat-error>
@@ -27,51 +24,59 @@
 </p>
 
 <p>
-          <mat-form-field appearance="fill" class="number"  >
-            <mat-label>Hard Disk Content</mat-label>
-            <input matInput type="text" name="number" formControlName="harddiskcontent" placeholder="please Enter Hard disk Content "required/>
-            <mat-error *ngIf="!harddiskform.controls['harddiskcontent'].valid">Hard Disk Content Number is required </mat-error>
-          </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Harddisk Password</mat-label>
+    <input matInput type="text" formControlName="harddiskpassword" placeholder="please Enter Hard disk Password" >
+    <mat-error *ngIf="!harddiskform.controls['harddiskpassword'].valid"></mat-error>
+    </mat-form-field>
 </p>
+
 <p>
-    <mat-form-field appearance="fill" class="number"  >
+  <mat-form-field appearance="fill">
+    <mat-label>Harddisk Info</mat-label>
+    <textarea style="resize: both;" matInput type="text" rows="5" formControlName="harddiskinfo" placeholder="please Enter Harddisk Info" required></textarea>
+    <mat-error *ngIf="!harddiskform.controls['harddiskinfo'].valid">Hard Disk Info is required</mat-error>
+    </mat-form-field>
+</p>
+
+<p>
+    <mat-form-field appearance="fill"   >
       <mat-label>Brand Name</mat-label>
       <input matInput type="text" name="number" formControlName="brandname" placeholder="please Enter Brand Name  "required/>
       <mat-error *ngIf="!harddiskform.controls['brandname'].valid">Brand Name is required </mat-error>
     </mat-form-field>
 </p>
 <p>
-    <mat-form-field appearance="fill" class="number"  >
+    <mat-form-field appearance="fill"   >
       <mat-label>Brand Color</mat-label>
       <input matInput type="text" name="number" formControlName="brandcolor" placeholder="please Enter Brand Color  "required/>
       <mat-error *ngIf="!harddiskform.controls['brandcolor'].valid">Brand Color is required </mat-error>
     </mat-form-field>
 </p>
 <p>
-    <mat-form-field appearance="fill" class="number"  >
-      <mat-label> Capacity</mat-label>
-      <input matInput type="text" name="number" formControlName="capacity" placeholder="please Enter Capacity  "required/>
-      <mat-error *ngIf="!harddiskform.controls['capacity'].valid">Capacity is required </mat-error>
-    </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Capacity</mat-label>
+    <mat-select  formControlName="capacity" required>
+      <mat-option value="1Tb">1Tb</mat-option>
+      <mat-option value="2Tb">2Tb</mat-option>
+      <mat-option value="3Tb">3Tb</mat-option>
+      <mat-option value="4Tb">4Tb</mat-option>
+      <mat-option value="5Tb">5Tb</mat-option>
+    </mat-select>
+    <mat-error *ngIf="!harddiskform.controls['capacity'].valid">Capacity is required </mat-error>
+  </mat-form-field>
 </p>
 <p>
-    <mat-form-field appearance="fill" class="number"  >
+    <mat-form-field appearance="fill"   >
       <mat-label> Serial No</mat-label>
       <input matInput type="text" name="number" formControlName="serialno" placeholder="please Enter Serial No  "required/>
       <mat-error *ngIf="!harddiskform.controls['serialno'].valid">Serial No is required </mat-error>
     </mat-form-field>
 </p>
 <br>
-    <div class="button" style="margin-right: 7%;margin-top:-1%;">
-        <button type="submit" class="button-row" mat-raised-button color="primary" (click)=cancel()>Cancel</button>
-    </div>
-
-
-      <div class="button" style="margin-right: -10%;margin-top:-2%;">
-        <button type="submit" class="button-row" mat-raised-button disabled color="primary" [disabled]="!harddiskform.valid">Save</button>
-    </div>
-
-
+<div class="button" >
+  <button type="button" class="button-row" mat-raised-button color="primary" (click)=cancel()>Cancel</button>
+  <button style="margin-left:16px ;" type="submit" class="button-row" mat-raised-button color="primary" >Submit</button>
+  </div>
       </form>
-    </mat-card-content>
-  </mat-card>
+    

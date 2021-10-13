@@ -1,3 +1,4 @@
+import { RolesComponent } from './roles/roles.component';
 import { DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -46,8 +47,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { HarddisklistComponent } from './harddisklist/harddisklist.component';
 import { HistoryComponent } from './history/history.component';
 import { HarddiskinuseComponent } from './harddiskinuse/harddiskinuse.component';
-import { RolesComponent } from './roles/roles.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { RoleComponent } from './role/role.component';
 
 @NgModule({
   declarations: [
@@ -59,15 +60,16 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     AddharddiskComponent,
     EditharddiskdetailComponent,
     ViewharddiskdetailComponent,
-    EntrydetailComponent,
+    EntrydetailComponent, 
     ReturndetailComponent,
     SidenavComponent,
     InventoryComponent,
     HarddisklistComponent,
     HistoryComponent,
     HarddiskinuseComponent,
-    RolesComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    RoleComponent,
+    RolesComponent
 
   ],
 
